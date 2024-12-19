@@ -27,7 +27,7 @@ class OpenAIChat():
             max_tokens=2500,
             temperature=0,
             top_p=1,
-            request_timeout=120,
+            # request_timeout=120,
     ):
 
         self.config = {
@@ -35,7 +35,7 @@ class OpenAIChat():
             'max_tokens': max_tokens,
             'temperature': temperature,
             'top_p': top_p,
-            'request_timeout': request_timeout,
+            # 'request_timeout': request_timeout,
         }
 
     def extract_list_from_string(self, input_string):
@@ -106,8 +106,8 @@ class OpenAIChat():
                     messages=messages,
                     max_tokens=self.config['max_tokens'],
                     temperature=self.config['temperature'],
-                    top_p=self.config['top_p'],
-                    request_timeout=self.config['request_timeout'])
+                    top_p=self.config['top_p'])
+                    # request_timeout=self.config['request_timeout'])
                     return response
                 except openai.RateLimitError:
                     print('Rate limit error, waiting for 40 second...')
