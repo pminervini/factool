@@ -1,8 +1,9 @@
 """Environment configuration for Factool. """
 import pydantic
+from pydantic_settings import BaseSettings
 
 
-class FactoolEnvConfig(pydantic.BaseSettings, frozen=True):
+class FactoolEnvConfig(BaseSettings, frozen=True):
     """Environment configuration for Factool."""
 
     openai_api_key: str = pydantic.Field(
