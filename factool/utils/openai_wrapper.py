@@ -3,17 +3,17 @@
 from __future__ import annotations
 
 import os
-import yaml
 import openai
+from openai import AsyncOpenAI
+
 import ast
-import pdb
 import asyncio
 from typing import Any, List
 import os
-import pathlib
 import openai
-import re
+from openai import AsyncOpenAI
 
+aclient = AsyncOpenAI(api_key=os.environ.get("OPENAI_API_KEY", None))
 
 # from factool.env_config import factool_env_config
 
@@ -29,13 +29,6 @@ class OpenAIChat():
             top_p=1,
             request_timeout=120,
     ):
-        if 'gpt' not in model_name:
-            openai.api_base = "http://localhost:8000/v1"
-        else:
-            #openai.api_base = "https://api.openai.com/v1"
-            openai.api_key = os.environ.get("OPENAI_API_KEY", None)
-            assert openai.api_key is not None, "Please set the OPENAI_API_KEY environment variable."
-            assert openai.api_key !='', "Please set the OPENAI_API_KEY environment variable."
 
         self.config = {
             'model_name': model_name,
@@ -59,7 +52,7 @@ class OpenAIChat():
             return input_string[start_index:end_index + 1]
         else:
             return None
-        
+
     def extract_dict_from_string(self, input_string):
         start_index = input_string.find('{')
         end_index = input_string.rfind('}')
@@ -68,7 +61,7 @@ class OpenAIChat():
             return input_string[start_index:end_index + 1]
         else:
             return None
-    
+
     def _boolean_fix(self, output):
         return output.replace("true", "True").replace("false", "False")
 
@@ -109,28 +102,20 @@ class OpenAIChat():
         async def _request_with_retry(messages, retry=3):
             for _ in range(retry):
                 try:
-                    response = await openai.ChatCompletion.acreate(
-                        model=self.config['model_name'],
-                        messages=messages,
-                        max_tokens=self.config['max_tokens'],
-                        temperature=self.config['temperature'],
-                        top_p=self.config['top_p'],
-                        request_timeout=self.config['request_timeout'],
-                    )
+                    response = await aclient.chat.completions.create(model=self.config['model_name'],
+                    messages=messages,
+                    max_tokens=self.config['max_tokens'],
+                    temperature=self.config['temperature'],
+                    top_p=self.config['top_p'],
+                    request_timeout=self.config['request_timeout'])
                     return response
-                except openai.error.RateLimitError:
+                except openai.RateLimitError:
                     print('Rate limit error, waiting for 40 second...')
                     await asyncio.sleep(40)
-                except openai.error.APIError:
+                except openai.APIError:
                     print('API error, waiting for 1 second...')
                     await asyncio.sleep(1)
-                except openai.error.Timeout:
-                    print('Timeout error, waiting for 1 second...')
-                    await asyncio.sleep(1)
-                except openai.error.ServiceUnavailableError:
-                    print('Service unavailable error, waiting for 3 second...')
-                    await asyncio.sleep(3)
-                except openai.error.APIConnectionError:
+                except openai.APIConnectionError:
                     print('API Connection error, waiting for 3 second...')
                     await asyncio.sleep(3)
 
@@ -142,7 +127,7 @@ class OpenAIChat():
         ]
 
         return await asyncio.gather(*async_responses)
-    
+
     async def async_run(self, messages_list, expected_type):
         retry = 1
         responses = [None for _ in range(len(messages_list))]
@@ -151,7 +136,7 @@ class OpenAIChat():
         while retry > 0 and len(messages_list_cur_index) > 0:
             print(f'{retry} retry left...')
             messages_list_cur = [messages_list[i] for i in messages_list_cur_index]
-            
+
             predictions = await self.dispatch_openai_requests(
                 messages_list=messages_list_cur,
             )
@@ -163,31 +148,30 @@ class OpenAIChat():
                 if pred is not None:
                     responses[messages_list_cur_index[i]] = pred
                     finised_index.append(messages_list_cur_index[i])
-            
+
             messages_list_cur_index = [i for i in messages_list_cur_index if i not in finised_index]
-            
+
             retry -= 1
-        
+
         return responses
 
 class OpenAIEmbed():
     def __init__():
-        openai.api_key = os.environ.get("OPENAI_API_KEY", None)
         assert openai.api_key is not None, "Please set the OPENAI_API_KEY environment variable."
         assert openai.api_key != '', "Please set the OPENAI_API_KEY environment variable."
 
     async def create_embedding(self, text, retry=3):
         for _ in range(retry):
             try:
-                response = await openai.Embedding.acreate(input=text, model="text-embedding-ada-002")
+                response = await aclient.embeddings.create(input=text, model="text-embedding-ada-002")
                 return response
-            except openai.error.RateLimitError:
+            except openai.RateLimitError:
                 print('Rate limit error, waiting for 1 second...')
                 await asyncio.sleep(1)
-            except openai.error.APIError:
+            except openai.APIError:
                 print('API error, waiting for 1 second...')
                 await asyncio.sleep(1)
-            except openai.error.Timeout:
+            except openai.Timeout:
                 print('Timeout error, waiting for 1 second...')
                 await asyncio.sleep(1)
         return None

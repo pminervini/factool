@@ -1,6 +1,8 @@
 import os
 import pathlib
-import openai
+from openai import OpenAI
+
+client = OpenAI()
 import yaml
 import json
 import asyncio
@@ -26,16 +28,14 @@ config = {
 # Make api calls asynchronously
 async def run_api(messages):
     async def single_run(message):
-        output = openai.ChatCompletion.create(
-            model=config['model_name'],
-            messages=message,
-            max_tokens=config['max_tokens'],
-            temperature=config['temperature'],
-            top_p=config['top_p'],
-            frequency_penalty=config['frequency_penalty'],
-            presence_penalty=config['presence_penalty'],
-            n=config['n'],
-        )
+        output = client.chat.completions.create(model=config['model_name'],
+        messages=message,
+        max_tokens=config['max_tokens'],
+        temperature=config['temperature'],
+        top_p=config['top_p'],
+        frequency_penalty=config['frequency_penalty'],
+        presence_penalty=config['presence_penalty'],
+        n=config['n'])
         return output.choices[0].message.content.strip()
 
     responses = [single_run(messages[index]) for index in range(len(messages))]

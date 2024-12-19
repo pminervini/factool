@@ -1,0 +1,3954 @@
+Directory: factool
+
+Directory Structure:
+```
+.
+├── .gitignore
+├── LICENSE
+├── MANIFEST.in
+├── README.md
+│   │   ├── datasets/chinese/README.md
+│   ├── datasets/code
+│   ├── datasets/knowledge_qa
+│   ├── datasets/math
+│   └── datasets/scientific
+│   ├── example/example.py
+│   └── example/readme.md
+│   ├── factool/__init__.py
+│   ├── factool/code
+│   │   ├── factool/code/__init__.py
+│   │   ├── factool/code/helper
+│   │   │   ├── factool/code/helper/__init__.py
+│   │   │   ├── factool/code/helper/_execution.py
+│   │   │   ├── factool/code/helper/execution.py
+│   │   │   ├── factool/code/helper/io_utils.py
+│   │   │   └── factool/code/helper/postprocess.py
+│   │   ├── factool/code/pipeline.py
+│   │   └── factool/code/tool.py
+│   ├── factool/env_config.py
+│   ├── factool/factool.py
+│   ├── factool/knowledge_qa
+│   │   ├── factool/knowledge_qa/__init__.py
+│   │   ├── factool/knowledge_qa/google_serper.py
+│   │   ├── factool/knowledge_qa/pipeline.py
+│   │   └── factool/knowledge_qa/tool.py
+│   ├── factool/math
+│   │   ├── factool/math/__init__.py
+│   │   ├── factool/math/pipeline.py
+│   │   └── factool/math/tool.py
+│   ├── factool/med_doc_qa
+│   │   ├── factool/med_doc_qa/__init__.py
+│   │   └── factool/med_doc_qa/pipeline.py
+│   ├── factool/scientific
+│   │   ├── factool/scientific/__init__.py
+│   │   ├── factool/scientific/pipeline.py
+│   │   └── factool/scientific/tool.py
+│   ├── factool/tasks.py
+│   └── factool/utils
+│       ├── factool/utils/__init_.py
+│       ├── factool/utils/base
+│       │   ├── factool/utils/base/__init__.py
+│       │   └── factool/utils/base/pipeline.py
+│       ├── factool/utils/claim_extractor.py
+│       ├── factool/utils/openai_wrapper.py
+│       ├── factool/utils/prompts
+│       └── factool/utils/utils_json.py
+│   ├── figs/factool.png
+│   ├── figs/factool_chinese.gif
+│   ├── figs/factool_japanese.gif
+│   ├── figs/factool_plugin_code.gif
+│   ├── figs/factool_plugin_kbqa.gif
+│   ├── figs/factool_plugin_kbqa2.gif
+│   ├── figs/factool_plugin_kbqa3.gif
+│   ├── figs/factool_plugin_math.gif
+│   └── figs/factool_plugin_scientific.gif
+│   ├── halu-j/README.md
+│   ├── halu-j/data
+│   ├── halu-j/figs
+│   │   └── halu-j/figs/example.png
+│   └── halu-j/prompts
+│       ├── halu-j/prompts/extract_evidence.txt
+│       ├── halu-j/prompts/filter_misleading_evidence.txt
+│       ├── halu-j/prompts/generate_misleading_evidence.txt
+│       ├── halu-j/prompts/generate_partial_irrelevant_evidence.txt
+│       ├── halu-j/prompts/reformat_critique.txt
+│       ├── halu-j/prompts/score.txt
+│       └── halu-j/prompts/synthesize_golden_critique.txt
+│   ├── plugin_config/LICENSE
+│   ├── plugin_config/logo.png
+│   ├── plugin_config/main.py
+├── setup.cfg
+├── setup.py
+└── version.py
+```
+
+Contents of version.py:
+```
+__version__ = "0.1.3"
+
+```
+
+Contents of LICENSE:
+```
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner that is granting the License.
+
+      "Legal Entity" shall mean the union of the acting entity and all
+      other entities that control, are controlled by, or are under common
+      control with that entity. For the purposes of this definition,
+      "control" means (i) the power, direct or indirect, to cause the
+      direction or management of such entity, whether by contract or
+      otherwise, or (ii) ownership of fifty percent (50%) or more of the
+      outstanding shares, or (iii) beneficial ownership of such entity.
+
+      "You" (or "Your") shall mean an individual or Legal Entity
+      exercising permissions granted by this License.
+
+      "Source" form shall mean the preferred form for making modifications,
+      including but not limited to software source code, documentation
+      source, and configuration files.
+
+      "Object" form shall mean any form resulting from mechanical
+      transformation or translation of a Source form, including but
+      not limited to compiled object code, generated documentation,
+      and conversions to other media types.
+
+      "Work" shall mean the work of authorship, whether in Source or
+      Object form, made available under the License, as indicated by a
+      copyright notice that is included in or attached to the work
+      (an example is provided in the Appendix below).
+
+      "Derivative Works" shall mean any work, whether in Source or Object
+      form, that is based on (or derived from) the Work and for which the
+      editorial revisions, annotations, elaborations, or other modifications
+      represent, as a whole, an original work of authorship. For the purposes
+      of this License, Derivative Works shall not include works that remain
+      separable from, or merely link (or bind by name) to the interfaces of,
+      the Work and Derivative Works thereof.
+
+      "Contribution" shall mean any work of authorship, including
+      the original version of the Work and any modifications or additions
+      to that Work or Derivative Works thereof, that is intentionally
+      submitted to Licensor for inclusion in the Work by the copyright owner
+      or by an individual or Legal Entity authorized to submit on behalf of
+      the copyright owner. For the purposes of this definition, "submitted"
+      means any form of electronic, verbal, or written communication sent
+      to the Licensor or its representatives, including but not limited to
+      communication on electronic mailing lists, source code control systems,
+      and issue tracking systems that are managed by, or on behalf of, the
+      Licensor for the purpose of discussing and improving the Work, but
+      excluding communication that is conspicuously marked or otherwise
+      designated in writing by the copyright owner as "Not a Contribution."
+
+      "Contributor" shall mean Licensor and any individual or Legal Entity
+      on behalf of whom a Contribution has been received by Licensor and
+      subsequently incorporated within the Work.
+
+   2. Grant of Copyright License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      copyright license to reproduce, prepare Derivative Works of,
+      publicly display, publicly perform, sublicense, and distribute the
+      Work and such Derivative Works in Source or Object form.
+
+   3. Grant of Patent License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      (except as stated in this section) patent license to make, have made,
+      use, offer to sell, sell, import, and otherwise transfer the Work,
+      where such license applies only to those patent claims licensable
+      by such Contributor that are necessarily infringed by their
+      Contribution(s) alone or by combination of their Contribution(s)
+      with the Work to which such Contribution(s) was submitted. If You
+      institute patent litigation against any entity (including a
+      cross-claim or counterclaim in a lawsuit) alleging that the Work
+      or a Contribution incorporated within the Work constitutes direct
+      or contributory patent infringement, then any patent licenses
+      granted to You under this License for that Work shall terminate
+      as of the date such litigation is filed.
+
+   4. Redistribution. You may reproduce and distribute copies of the
+      Work or Derivative Works thereof in any medium, with or without
+      modifications, and in Source or Object form, provided that You
+      meet the following conditions:
+
+      (a) You must give any other recipients of the Work or
+          Derivative Works a copy of this License; and
+
+      (b) You must cause any modified files to carry prominent notices
+          stating that You changed the files; and
+
+      (c) You must retain, in the Source form of any Derivative Works
+          that You distribute, all copyright, patent, trademark, and
+          attribution notices from the Source form of the Work,
+          excluding those notices that do not pertain to any part of
+          the Derivative Works; and
+
+      (d) If the Work includes a "NOTICE" text file as part of its
+          distribution, then any Derivative Works that You distribute must
+          include a readable copy of the attribution notices contained
+          within such NOTICE file, excluding those notices that do not
+          pertain to any part of the Derivative Works, in at least one
+          of the following places: within a NOTICE text file distributed
+          as part of the Derivative Works; within the Source form or
+          documentation, if provided along with the Derivative Works; or,
+          within a display generated by the Derivative Works, if and
+          wherever such third-party notices normally appear. The contents
+          of the NOTICE file are for informational purposes only and
+          do not modify the License. You may add Your own attribution
+          notices within Derivative Works that You distribute, alongside
+          or as an addendum to the NOTICE text from the Work, provided
+          that such additional attribution notices cannot be construed
+          as modifying the License.
+
+      You may add Your own copyright statement to Your modifications and
+      may provide additional or different license terms and conditions
+      for use, reproduction, or distribution of Your modifications, or
+      for any such Derivative Works as a whole, provided Your use,
+      reproduction, and distribution of the Work otherwise complies with
+      the conditions stated in this License.
+
+   5. Submission of Contributions. Unless You explicitly state otherwise,
+      any Contribution intentionally submitted for inclusion in the Work
+      by You to the Licensor shall be under the terms and conditions of
+      this License, without any additional terms or conditions.
+      Notwithstanding the above, nothing herein shall supersede or modify
+      the terms of any separate license agreement you may have executed
+      with Licensor regarding such Contributions.
+
+   6. Trademarks. This License does not grant permission to use the trade
+      names, trademarks, service marks, or product names of the Licensor,
+      except as required for reasonable and customary use in describing the
+      origin of the Work and reproducing the content of the NOTICE file.
+
+   7. Disclaimer of Warranty. Unless required by applicable law or
+      agreed to in writing, Licensor provides the Work (and each
+      Contributor provides its Contributions) on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+      implied, including, without limitation, any warranties or conditions
+      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+      PARTICULAR PURPOSE. You are solely responsible for determining the
+      appropriateness of using or redistributing the Work and assume any
+      risks associated with Your exercise of permissions under this License.
+
+   8. Limitation of Liability. In no event and under no legal theory,
+      whether in tort (including negligence), contract, or otherwise,
+      unless required by applicable law (such as deliberate and grossly
+      negligent acts) or agreed to in writing, shall any Contributor be
+      liable to You for damages, including any direct, indirect, special,
+      incidental, or consequential damages of any character arising as a
+      result of this License or out of the use or inability to use the
+      Work (including but not limited to damages for loss of goodwill,
+      work stoppage, computer failure or malfunction, or any and all
+      other commercial damages or losses), even if such Contributor
+      has been advised of the possibility of such damages.
+
+   9. Accepting Warranty or Additional Liability. While redistributing
+      the Work or Derivative Works thereof, You may choose to offer,
+      and charge a fee for, acceptance of support, warranty, indemnity,
+      or other liability obligations and/or rights consistent with this
+      License. However, in accepting such obligations, You may act only
+      on Your own behalf and on Your sole responsibility, not on behalf
+      of any other Contributor, and only if You agree to indemnify,
+      defend, and hold each Contributor harmless for any liability
+      incurred by, or claims asserted against, such Contributor by reason
+      of your accepting any such warranty or additional liability.
+
+   END OF TERMS AND CONDITIONS
+
+   APPENDIX: How to apply the Apache License to your work.
+
+      To apply the Apache License to your work, attach the following
+      boilerplate notice, with the fields enclosed by brackets "[]"
+      replaced with your own identifying information. (Don't include
+      the brackets!)  The text should be enclosed in the appropriate
+      comment syntax for the file format. We also recommend that a
+      file or class name and description of purpose be included on the
+      same "printed page" as the copyright notice for easier
+      identification within third-party archives.
+
+   Copyright [yyyy] [name of copyright owner]
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+```
+
+Contents of MANIFEST.in:
+```
+recursive-include factool/utils *
+include factool/datasets/knowledge_qa/knowledge_QA.json
+include factool/datasets/scientific/scientific.json
+```
+
+Contents of README.md:
+```
+## FacTool: Factuality Detection in Generative AI
+[**Factuality Leaderboard**](https://github.com/GAIR-NLP/factool#factuality-leaderboard) | 
+[**Installation**](https://github.com/GAIR-NLP/factool#installation) | 
+[**Quick Start**](https://github.com/GAIR-NLP/factool#quick-start) |
+[**ChatGPT Plugin with FacTool**](https://github.com/GAIR-NLP/factool#chatgpt-plugin-with-factool) |
+[**Citation**](https://github.com/GAIR-NLP/factool#citation) |
+
+This repository contains the source code and plugin configuration for our [paper](https://arxiv.org/abs/2307.13528).
+
+This repository also contains the resources for [Halu-J](https://arxiv.org/abs/2407.12943), which introduces an open-source model for critique-based hallucination judge.
+
+[Project Website](https://ethanc111.github.io/factool_website/)
+
+Factool is a tool augmented framework for detecting factual errors of texts generated by large language models (e.g., ChatGPT). 
+Factool now supports 4 tasks: 
+* **knowledge-based QA**: Factool detects factual errors in knowledge-based QA.
+* **code generation**: Factool detects execution errors in code generation.
+* **mathematical reasoning**: Factool detects calculation errors in mathematical reasoning.
+* **scientific literature review**: Factool detects hallucinated scientific literatures.
+
+<p align="center"> 
+<img src="figs/factool.png" width="300"/>
+ </p>
+
+## News
+- [2023/09/25] 🔥 Congratulate Baichuan2-53B on [achieving SOTA performance on the ChineseFactEval benchmark across Chinese LLMs](https://zhuanlan.zhihu.com/p/658487952)!
+- [2023/09/13] We release ChineseFactEval, a [factuality benchmark for Chinese LLMs](https://github.com/GAIR-NLP/factool/tree/main/datasets/chinese)
+- [2023/07/25] We introduce FacTool, a tool augmented framework for detecting factual errors of texts generated by LLMs
+
+## Demo of Knowledge-based QA: 
+
+![Alt Text](./figs/factool_plugin_kbqa.gif)
+
+![Alt Text](./figs/factool_chinese.gif)
+
+![Alt Text](./figs/factool_japanese.gif)
+
+## Factuality Leaderboard
+
+Our factuality leaderboard shows the factual accuracy of different chatbots evaluated by FacTool.
+
+| LLMs | Weighted Claim-Level Accuracy | Response-Level Accuracy |
+| -------- | -------- | -------- |
+| GPT-4  | **75.60**  | **43.33**  |
+| ChatGPT  | 68.63  | 36.67  |
+| Claude-v1  | 63.95  | 26.67 |
+| Bard  | 61.15  | 33.33 |
+| Vicuna-13B  | 50.35 | 21.67 |
+
+
+## Installation
+
+* #### For General User
+
+```bash
+pip install factool
+```
+
+
+* #### For Developer
+
+```bash
+git clone git@github.com:GAIR-NLP/factool.git
+cd factool
+pip install -e .
+``` 
+ 
+
+## Quick Start
+
+### API Key Preparation
+* get your OpenAI API key from [here](https://beta.openai.com/). This is used in all scenarios (Knowledge-based QA, Code, Math, Scientific Literature Review). 
+* get your Serper API key from [here](https://serper.dev/). This is only used in Knowledge-based QA. 
+* get your Scraper API key from [here](https://www.scraperapi.com/). This is only used in Scientific Literature Review. 
+
+### General Usage
+
+You could also directly refer to [./example/example.py](https://github.com/GAIR-NLP/factool/blob/main/example/example.py) and [example_inputs.jsonl](https://github.com/GAIR-NLP/factool/blob/main/example/example_inputs.jsonl) for general usage.
+
+<details>
+<summary>General Usage (click to toggle the content)</summary>
+
+```python
+export OPENAI_API_KEY=... # this is required in all tasks
+export SERPER_API_KEY=... # this is required only in knowledge-based QA
+export SCRAPER_API_KEY=... # this is requried only in scientific literature review
+```
+
+```python
+# Initialize a list of inputs. "entry_point" is only needed when the task is "code generation"
+# please refer to example_inputs.jsonl for example inputs for each category
+inputs = [
+            {"prompt": "<prompt1>", "response": "<response1>", "category": "<category1>", "entry_point": "<entry_point_1>"},
+            {"prompt": "<prompt2>", "response": "<response2>", "category": "<category2>", "entry_point": "<entry_point_2>"},
+          ...
+        ]
+```
+
+where
+* `prompt`: The prompt for the model to generate the response.
+* `response`: The response generated by the model.
+* `category`: The category of the task. it could be:
+    * `kbqa`
+    * `code`
+    * `math`
+    * `scientific`
+* `entry_point`: The function name of the code snippet to be fact-checked in the response. Could be "null" if the category of the task is not `code`.
+
+```python
+from factool import Factool
+
+# Initialize a Factool instance with the specified keys. foundation_model could be either "gpt-3.5-turbo" or "gpt-4"
+factool_instance = Factool("gpt-4")
+
+inputs = [
+            {
+                "prompt": "Introduce Graham Neubig",
+                "response": "Graham Neubig is a professor at MIT",
+                "category": "kbqa"
+            },
+            ...
+]
+response_list = factool_instance.run(inputs)
+
+print(response_list)
+```
+</details>
+
+### Knowledge-based QA
+<details>
+<summary>Detailed usage of factool on knowledge-based QA (click to toggle the content)</summary>
+
+
+```python
+export OPENAI_API_KEY=...
+export SERPER_API_KEY=...
+```
+
+
+```python
+from factool import Factool
+
+# Initialize a Factool instance with the specified keys. foundation_model could be either "gpt-3.5-turbo" or "gpt-4"
+factool_instance = Factool("gpt-4")
+
+inputs = [
+            {
+                "prompt": "Introduce Graham Neubig",
+                "response": "Graham Neubig is a professor at MIT",
+                "category": "kbqa"
+            },
+]
+response_list = factool_instance.run(inputs)
+
+print(response_list)
+```
+
+
+
+
+The response_list should follow the following format:
+
+```python
+{
+  "average_claim_level_factuality": avg_claim_level_factuality
+  "average_response_level_factuality": avg_response_level_factuality
+  "detailed_information": [
+    {
+      'prompt': prompt_1, 
+      'response': response_1, 
+      'category': 'kbqa', 
+      'claims': [claim_11, claim_12, ..., claims_1n], 
+      'queries': [[query_111, query_112], [query_121, query_122], ..[query_1n1, query_1n2]], 
+      'evidences': [[evidences_with_source_11], [evidences_with_source_12], ..., [evidences_with_source_1n]], 
+      'claim_level_factuality': [{claim_11, reasoning_11, error_11, correction_11, factuality_11}, {claim_12, reasoning_12, error_12, correction_12, factuality_12}, ..., {claim_1n, reasoning_1n, error_1n, correction_1n, factuality_1n}], 
+      'response_level_factuality': factuality_1
+    },
+    {
+      'prompt': prompt_2, 
+      'response': response_2, 
+      'category': 'kbqa',
+      'claims': [claim_21, claim_22, ..., claims_2n], 
+      'queries': [[query_211, query_212], [query_221, query_222], ..., [query_2n1, query_2n2]], 
+      'evidences': [[evidences_with_source_21], [evidences_with_source_22], ..., [evidences_with_source_2n]], 
+      'claim_level_factuality': [{claim_21, reasoning_21, error_21, correction_21, factuality_21}, {claim_22, reasoning_22, error_22, correction_22, factuality_22}, ..., {claim_2n, reasoning_2n, error_2n, correction_2n, factuality_2n}],
+      'response_level_factuality': factuality_2,
+    },
+    ...
+  ]
+}
+```
+
+In this case, you will get:
+
+
+```python
+{
+    'average_claim_level_factuality': 0.0,  
+    'average_response_level_factuality': 0.0, 
+    'detailed_information': [
+        {
+          'prompt': 'Introduce Graham Neubig',
+          'response': 'Graham Neubig is a professor at MIT', 
+          'category': 'kbqa', 'search_type': 'online', 
+          'claims': [{'claim': 'Graham Neubig is a professor at MIT'}], 
+          'queries': [['Graham Neubig current position', 'Is Graham Neubig a professor at MIT?']], 
+          'evidences': [{'evidence': 'I am an Associate Professor of Computer Science at Carnegie Mellon University and CEO of Inspired Cognition. My research and development focuses on AI and ...', 'source': 'https://www.linkedin.com/in/graham-neubig-10b41616b'}, {'evidence': 'Missing: position | Show results with:position', 'source': 'https://www.linkedin.com/in/graham-neubig-10b41616b'}, {'evidence': 'My research is concerned with language and its role in human communication. In particular, my long-term research goal is to break down barriers in ...', 'source': 'https://miis.cs.cmu.edu/people/222215657/graham-neubig'}, {'evidence': 'My research focuses on handling human languages (like English or Japanese) with computers -- natural language processing. In particular, I am interested in ...', 'source': 'http://www.phontron.com/'}, {'evidence': 'Missing: current | Show results with:current', 'source': 'http://www.phontron.com/'}, {'evidence': 'Graham Neubig. I am an Associate Professor at the Carnegie Mellon University Language Technology Institute in the School of Computer Science, and work with ...', 'source': 'http://www.phontron.com/'}, {'evidence': 'Missing: MIT? | Show results with:MIT?', 'source': 'http://www.phontron.com/'}, {'evidence': 'Associate Professor, Language Technology Institute, Carnegie Mellon University Affiliated Faculty, Machine Learning Department, Carnegie Mellon University', 'source': 'https://www.phontron.com/research.php'}, {'evidence': 'Missing: MIT? | Show results with:MIT?', 'source': 'https://www.phontron.com/research.php'}, {'evidence': 'MIT Embodied Intelligence ... About the speaker: Graham ...', 'source': 'https://youtube.com/watch?v=CtcP5bvODzY'}],
+          'claim_level_factuality': [
+              {
+                'reasoning': 'The given text is non-factual. The evidence provided clearly states that Graham Neubig is an Associate Professor of Computer Science at Carnegie Mellon University, not at MIT.', 
+                'error': 'The error in the text is the incorrect affiliation of Graham Neubig. He is not a professor at MIT.', 
+                'correction': 'Graham Neubig is a professor at Carnegie Mellon University.', 
+                'factuality': False, 
+                'claim': 'Graham Neubig is a professor at MIT'
+              }
+          ], 
+          'response_level_factuality': False
+       }
+    ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+### Code
+
+
+
+
+
+<details>
+<summary>Detailed usage of factool on code (click to toggle the content)</summary>
+
+```python
+export OPENAI_API_KEY=...
+```
+
+```python
+
+from factool import Factool
+
+# Initialize a Factool instance with the specified keys. foundation_model could be either "gpt-3.5-turbo" or "gpt-4"
+factool_instance = Factool("gpt-4")
+
+inputs = [
+        {
+            "prompt": "def get_max_triples(n): \"\"\" You are given a positive integer n. You have to create an integer array a of length n. For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1. Return the number of triples (a[i], a[j], a[k]) of a where i < j < k, and a[i] + a[j] + a[k] is a multiple of 3. Example : Input: n = 5 Output: 1 Explanation: a = [1, 3, 7, 13, 21] The only valid triple is (1, 7, 13). \"\"\" Now implement the function get_max_triples using Python",
+            "response": "def get_max_triples(n):\n    a = [i * i - i + 1 for i in range(1, n+1)]\n    count = 0\n    for i in range(n-2):\n        for j in range(i+1, n-1):\n            for k in range(j+1, n):\n                if (a[i] + a[j] + a[k]) % 3 == 0:\n                    count += 1\n    return count\n\nprint(get_max_triples(5)) # Output: 1",
+            "category": "code",
+            "entry_point": "get_max_triples"
+        }
+]
+
+response_list = factool_instance.run(inputs)
+print(response_list)
+```
+
+
+The response_list should follow the following format:
+
+```python
+response_list = 
+{
+    "average_claim_level_factuality": avg_claim_level_factuality,
+    "average_response_level_factuality": avg_response_level_factuality,
+    "detailed_information": [
+      {
+          'prompt': prompt_1, 
+          'response': response_1, 
+          'category': 'code',
+          'entry_point': entry_point_1,
+          'claim': claim_1,
+          'testcases_queries': [testcase_query_11, testcase_query_12, testcase_query_13], 
+          'potential_solutions_queries': [potential_solution_query_11, potential_solution_query_12, potential_solution_query_13], 
+          'exec_results': [[evidences_111, evidences_112, evidences_113, evidences_114], [evidences_121, evidences_122, evidences_123, evidences_124], [evidences_131, evidences_132, evidences_133, evidences_134]],  # note that evidences_114, evidences_124, evidences_134 are the execution results of response_1 against testcase_query_11, testcase_query_12, and testcase_query_13, respectively.
+          'claim_level_factuality': factuality_1,
+          'response_level_factuality': factuality_1,
+      },
+      {
+          'prompt': prompt_2, 
+          'response': response_2, 
+          'category': 'code',
+          'entry_point': entry_point_2,
+          'claim': claim_2,
+          'testcases_queries': [testcase_query_21, testcase_query_22, testcase_query_23], 
+          'potential_solutions_queries': [potential_solution_query_21, potential_solution_query_22, potential_solution_query_23], 
+          'exec_results': [[evidences_211, evidences_212, evidences_213, evidences_214], [evidences_221, evidences_222, evidences_223, evidences_224], [evidences_231, evidences_232, evidences_233, evidences_234]], # note that evidences_214, evidences_224, evidences_234 are the execution results of response_1 against testcase_query_21, testcase_query_22, and testcase_query_23, respectively.
+          'claim_level_factuality': factuality_2,
+          'response_level_factuality': factuality_2,
+      },
+    ]
+    ...
+}
+```
+
+
+
+In this case, you will get:
+
+```python
+{
+  "average_claim_level_factuality": 1.0,
+  "average_response_level_factuality": 1.0,
+  "detailed_information": [
+    {
+      'prompt': 'def get_max_triples(n): """ You are given a positive integer n. You have to create an integer array a of length n. For each i (1 ≤ i ≤ n), the value of a[i] = i * i - i + 1. Return the number of triples (a[i], a[j], a[k]) of a where i < j < k, and a[i] + a[j] + a[k] is a multiple of 3. Example : Input: n = 5 Output: 1 Explanation: a = [1, 3, 7, 13, 21] The only valid triple is (1, 7, 13). """ Now implement the function get_max_triples using Python',
+      'response': 'def get_max_triples(n):\n    a = [i * i - i + 1 for i in range(1, n+1)]\n    count = 0\n    for i in range(n-2):\n        for j in range(i+1, n-1):\n            for k in range(j+1, n):\n                if (a[i] + a[j] + a[k]) % 3 == 0:\n                    count += 1\n    return count\n\nprint(get_max_triples(5)) # Output: 1', 
+      'category': 'code',
+      'entry_point': 'get_max_triples', 
+      'claim': 'def get_max_triples(n):\n    a = [i * i - i + 1 for i in range(1, n+1)]\n    count = 0\n    for i in range(n-2):\n        for j in range(i+1, n-1):\n            for k in range(j+1, n):\n                if (a[i] + a[j] + a[k]) % 3 == 0:\n                    count += 1\n    return count\n\nprint(get_max_triples(5)) # Output: 1', 
+      'testcases_queries': ['get_max_triples(5)', 'get_max_triples(10)', 'get_max_triples(3)'], 'potential_solutions_queries': ['def get_max_triples(n):\n    a = [i * i - i + 1 for i in range(1, n+1)]\n    count = 0\n    for i in range(n-2):\n        for j in range(i+1, n-1):\n            for k in range(j+1, n):\n                if (a[i] + a[j] + a[k]) % 3 == 0:\n                    count += 1\n    return count', 'def get_max_triples(n):\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    count = 0\n    for i in range(n):\n        for j in range(i + 1, n):\n            for k in range(j + 1, n):\n                if (a[i] + a[j] + a[k]) % 3 == 0:\n                    count += 1\n    return count', 'def get_max_triples(n):\n    a = [i * i - i + 1 for i in range(1, n+1)]\n    count = 0\n    for i in range(n):\n        for j in range(i+1, n):\n            for k in range(j+1, n):\n                if (a[i] + a[j] + a[k]) % 3 == 0:\n                    count += 1\n    return count', 'def get_max_triples(n):\n    a = [i * i - i + 1 for i in range(1, n+1)]\n    count = 0\n    for i in range(n-2):\n        for j in range(i+1, n-1):\n            for k in range(j+1, n):\n                if (a[i] + a[j] + a[k]) % 3 == 0:\n                    count += 1\n    return count\n\nprint(get_max_triples(5)) # Output: 1'], 
+      'exec_results': [[1, 1, 1, 1], [36, 36, 36, 36], [0, 0, 0, 0]],
+      'claim_level_factuality': True,
+      'response_level_factuality': True
+    }
+  ]
+}
+
+```
+
+
+</details>
+
+
+
+
+
+
+
+### Math
+
+
+
+<details>
+<summary>Detailed usage of factool on math (click to toggle the content)</summary>
+
+```python
+export OPENAI_API_KEY=...
+```
+
+
+```python
+from factool import Factool
+
+
+# Initialize a Factool instance with the specified keys. foundation_model could be either "gpt-3.5-turbo" or "gpt-4"
+factool_instance = Factool("gpt-4")
+
+inputs = [
+        {
+            "prompt": "Stephen placed an online order for groceries.  His final bill came to $7023116.  Because this was through a delivery vendor, they tacked on a 25% fee to his final total and charged him $3.00 in delivery fees.  Stephen also added a $4.00 tip.  After the extra fees, what was the final price of Stephen's groceries?",
+            "category": "math",
+            "response": "Okay, here are the steps to solve this:\n* Stephen's initial grocery bill was $7023116\n* The delivery vendor charged a 25% fee on top of that. 25% of $7023116 is 0.25 * $7023116 = $1755779\n* They also charged a flat $3 delivery fee\n* Stephen added a $4 tip\n* So the total charges were:\n    * Initial groceries: $7023116\n    * 25% fee: $1755779\n    * Delivery fee: $3 \n    * Tip: $4\n* Adding all that up, the total final price was $7023116 + $1755779 + $3 + $4 = $8779902\n\nSo the final price of Stephen's groceries was $8779902"
+        },
+]
+
+response_list = factool_instance.run(inputs)
+
+print(response_list)
+```
+
+The response_list should follow the following format:
+
+```python
+{
+    "average_claim_level_factuality": avg_claim_level_factuality,
+    "average_response_level_factuality": avg_response_level_factuality,
+    "detailed_information": [
+      {
+          'prompt': prompt_1, 
+          'response': response_1, 
+          'category': 'math', 
+          'claims': [claim_11, claim_12, ..., claims_1n], 
+          'queries': [query_11, query_12, ..., query_1n], 
+          'execution_results': [exec_result_11, exec_result_12, ..., exec_result_1n],
+          'claim_level_factuality': [factuality_11, factuality_12, ..., factuality_1n], 
+          'response_level_factuality': factuality_1
+      },
+      {
+          'prompt': prompt_2, 
+          'response': response_2, 
+          'category': 'math', 
+          'claims': [claim_21, claim_22, ..., claims_2n], 
+          'queries': [query_21, query_22, ..., query_2n], 
+          'execution_results': [exec_result_21, exec_result_22, ..., exec_result_2n],
+          'claim_level_factuality': [factuality_21, factuality_22, ..., factuality_2n], 
+          'response_level_factuality': factuality_2
+      },
+      ...
+    ]
+}
+```
+
+
+In this case, you will get:
+
+```python
+{
+  "average_claim_level_factuality": 0.5,
+  "average_response_level_factuality": 0.0,
+  "detailed_information": [
+    {
+      'prompt': "Stephen placed an online order for groceries.  His final bill came to $7023116.  Because this was through a delivery vendor, they tacked on a 25% fee to his final total and charged him $3.00 in delivery fees.  Stephen also added a $4.00 tip.  After the extra fees, what was the final price of Stephen's groceries?",
+      'category': 'math',
+      'response': "Okay, here are the steps to solve this:\n* Stephen's initial grocery bill was $7023116\n* The delivery vendor charged a 25% fee on top of that. 25% of $7023116 is 0.25 * $7023116 = $1755779\n* They also charged a flat $3 delivery fee\n* Stephen added a $4 tip\n* So the total charges were:\n    * Initial groceries: $7023116\n    * 25% fee: $1755779\n    * Delivery fee: $3 \n    * Tip: $4\n* Adding all that up, the total final price was $7023116 + $1755779 + $3 + $4 = $8779902\n\nSo the final price of Stephen's groceries was $8779902", 'claims': [{'math_calculation': '0.25 * 7023116', 'calculated_answer': '1755779'}, {'math_calculation': '7023116 + 1755779 + 3 + 4', 'calculated_answer': '8779902'}], 'queries': [{'python_snippet': 'print(0.25 * 7023116 == 1755779)'}, {'python_snippet': 'print(7023116 + 1755779 + 3 + 4 == 8779902)'}], 'execution_results': ['True', 'False'],
+      'claim_level_factuality': [True, False],
+      'response_level_factuality': False
+    }
+  ]
+}
+```
+
+
+</details>
+
+
+
+
+
+
+### Scientific Literature Review
+
+
+
+
+<details>
+<summary>Detailed usage of factool on scientific literature review (click to toggle the content)</summary>
+
+```python
+export OPENAI_API_KEY=...
+export SCRAPER_API_KEY=...
+```
+
+
+```python
+from factool import Factool
+
+# Initialize a Factool instance with the specified keys. foundation_model could be either "gpt-3.5-turbo" or "gpt-4"
+factool_instance = Factool("gpt-4")
+
+inputs = [
+
+        {
+            "prompt": "Detail how machine learning algorithms are applied in data"
+                      " analytics and the processes involved in training"
+                      " these algorithms. Please cite relevant research papers"
+                      " or textbooks to support your points, including the author's"
+                      " name, the title of the work, and the year of publication.",
+            "category": "scientific",
+            "response": "Machine learning algorithms play a crucial role in data"
+                        " analytics. They are used to extract insights and knowledge"
+                        " from large datasets, which can be used to make informed"
+                        " decisions and predictions. The following are the processes"
+                        " involved in training machine learning algorithms:\n\n1. "
+                        "Data Preprocessing: The first step in training a machine"
+                        " learning algorithm is to preprocess the data. This involves"
+                        " cleaning the data, handling missing values, "
+                        "encoding categorical variables, and scaling the data. "
+                        "The aim of preprocessing is to ensure that the data is in"
+                        " a format that can be used by the machine learning algorithm.\n2. Feature Selection: Once the data has been preprocessed, the next step is to select the relevant features that will be used to train the machine learning algorithm. This involves identifying the features that are most important for predicting the target variable. Feature selection can be done using various techniques, such as filter methods, wrapper methods, and embedded methods.\n3. Model Selection: After feature selection, the next step is to select the appropriate machine learning algorithm to use. There are various types of machine learning algorithms, such as supervised learning, unsupervised learning, and reinforcement learning. The choice of algorithm depends on the nature of the problem and the type of data available.\n4. Training the Model: Once the model has been selected, the next step is to train the machine learning algorithm using the preprocessed data. This involves using a training set of data to optimize the parameters of the model so that it can accurately predict the target variable.\n5. Model Evaluation: After the model has been trained, the next step is to evaluate its performance. This involves testing the model on a separate test set of data and measuring its accuracy, precision, recall, and other performance metrics.\n6. Model Deployment: Once the model has been evaluated and fine-tuned, it can be deployed in a production environment. This involves integrating the model into a larger system or workflow, and monitoring its performance over time.\n\nResearch papers and textbooks that support the above points include:\n\n* \"An Introduction to Machine Learning\" by Alpaydin, B., (2010) which provides a comprehensive overview of machine learning algorithms and their applications.\n* \"Data Mining: Concepts and Techniques\" by Han, J., Kamber, B., & Pei, J., (2011) which provides a detailed introduction to data mining and its applications.\n* \"Machine Learning: Trends, Perspectives, and Prospects\" by Kamber, B., & Pei, J., (2012) which provides an overview of the current trends and future prospects of machine learning.\n* \"Machine Learning for Data Mining\" by He, C., & Wang, Y., (2015) which provides an in-depth introduction to machine learning algorithms and their applications in data mining."
+        },
+]
+
+response_list = factool_instance.run(inputs)
+
+print(response_list)
+```
+
+The response_list should follow the following format:
+
+```python
+{
+  "average_claim_level_factuality": avg_claim_level_factuality,
+  "average_response_level_factuality": avg_response_level_factuality,
+  "detailed_information": [
+    {
+        'prompt': prompt_1, 
+        'response': response_1, 
+        'category': 'scientific', 
+        'claims': [claim_11, claim_12, ..., claims_1n], 
+        'queries': [query_11, query_12, ..., query_1n], 
+        'evidences': [evidences_11, evidences_12, ..., evidences_1n], 
+        'claim_level_factuality': [{claim_11, evidence_11, error_11, factuality_11}, {claim_12, evidence_12, error_12, factuality_12}, ..., {claim_1n, evidence_1n, error_1n, factuality_1n}], 
+        'response_level_factuality': factuality_1
+    },
+    {
+        'prompt': prompt_2, 
+        'response': response_2, 
+        'category': 'scientific', 
+        'claims': [claim_21, claim_22, ..., claims_2n], 
+        'queries': [query_21, query_22, ..., query_2n],
+        'evidences': [evidences_21, evidences_22, ..., evidences_2n], 
+        'claim_level_factuality': [{claim_21, evidence_21, error_21, factuality_21}, {claim_22, evidence_22, error_22, factuality_22}, ..., {claim_2n, evidence_2n, error_2n, factuality_2n}], 
+        'response_level_factuality': factuality_2
+    },
+    ...
+  ]
+}
+```
+
+In this case, you will get:
+
+```python
+{
+    "average_claim_level_factuality": 0.0, 
+    "average_response_level_factuality": 0.0, 
+    "detailed_information": [
+      {
+        'prompt': "Detail how machine learning algorithms are applied in data analytics and the processes involved in training these algorithms. Please cite relevant research papers or textbooks to support your points, including the author's name, the title of the work, and the year of publication.", 'response': 'Machine learning algorithms play a crucial role in data analytics. They are used to extract insights and knowledge from large datasets, which can be used to make informed decisions and predictions. The following are the processes involved in training machine learning algorithms:\n\n1. Data Preprocessing: The first step in training a machine learning algorithm is to preprocess the data. This involves cleaning the data, handling missing values, encoding categorical variables, and scaling the data. The aim of preprocessing is to ensure that the data is in a format that can be used by the machine learning algorithm.\n2. Feature Selection: Once the data has been preprocessed, the next step is to select the relevant features that will be used to train the machine learning algorithm. This involves identifying the features that are most important for predicting the target variable. Feature selection can be done using various techniques, such as filter methods, wrapper methods, and embedded methods.\n3. Model Selection: After feature selection, the next step is to select the appropriate machine learning algorithm to use. There are various types of machine learning algorithms, such as supervised learning, unsupervised learning, and reinforcement learning. The choice of algorithm depends on the nature of the problem and the type of data available.\n4. Training the Model: Once the model has been selected, the next step is to train the machine learning algorithm using the preprocessed data. This involves using a training set of data to optimize the parameters of the model so that it can accurately predict the target variable.\n5. Model Evaluation: After the model has been trained, the next step is to evaluate its performance. This involves testing the model on a separate test set of data and measuring its accuracy, precision, recall, and other performance metrics.\n6. Model Deployment: Once the model has been evaluated and fine-tuned, it can be deployed in a production environment. This involves integrating the model into a larger system or workflow, and monitoring its performance over time.\n\nResearch papers and textbooks that support the above points include:\n\n* "An Introduction to Machine Learning" by Alpaydin, B., (2010) which provides a comprehensive overview of machine learning algorithms and their applications.\n* "Data Mining: Concepts and Techniques" by Han, J., Kamber, B., & Pei, J., (2011) which provides a detailed introduction to data mining and its applications.\n* "Machine Learning: Trends, Perspectives, and Prospects" by Kamber, B., & Pei, J., (2012) which provides an overview of the current trends and future prospects of machine learning.\n* "Machine Learning for Data Mining" by He, C., & Wang, Y., (2015) which provides an in-depth introduction to machine learning algorithms and their applications in data mining.', 
+        'category': 'scientific', 
+        'claims': [{'paper_title': 'An Introduction to Machine Learning', 'paper_author(s)': 'Alpaydin, B.', 'paper_pub_year': '2010'}, {'paper_title': 'Data Mining: Concepts and Techniques', 'paper_author(s)': 'Han, J., Kamber, B., & Pei, J.', 'paper_pub_year': '2011'}, {'paper_title': 'Machine Learning: Trends, Perspectives, and Prospects', 'paper_author(s)': 'Kamber, B., & Pei, J.', 'paper_pub_year': '2012'}, {'paper_title': 'Machine Learning for Data Mining', 'paper_author(s)': 'He, C., & Wang, Y.', 'paper_pub_year': '2015'}], 
+        'queries': ['An Introduction to Machine Learning', 'Data Mining: Concepts and Techniques', 'Machine Learning: Trends, Perspectives, and Prospects', 'Machine Learning for Data Mining'], 
+        'evidences': [{'title': 'Introduction to machine learning', 'author': ['Y Baştanlar', 'M Özuysal'], 'pub_year': '2014'}, {'title': 'Data mining: Data mining concepts and techniques', 'author': ['S Agarwal'], 'pub_year': '2013'}, {'title': 'Machine learning: Trends, perspectives, and prospects', 'author': ['MI Jordan', 'TM Mitchell'], 'pub_year': '2015'}, {'title': 'Machine learning and data mining', 'author': ['TM Mitchell'], 'pub_year': '1999'}], 
+        'claim_level_factuality': [{'generated_paper_title': 'An Introduction to Machine Learning', 'generated_paper_author(s)': 'Alpaydin, B.', 'generated_paper_pub_year': '2010', 'actual_paper_title': 'Introduction to machine learning', 'actual_paper_author(s)': ['Y Baştanlar', 'M Özuysal'], 'actual_paper_pub_year': '2014', 'error': ['wrong_paper_author(s)', 'wrong_paper_pub_year'], 'factuality': False}, {'generated_paper_title': 'Data Mining: Concepts and Techniques', 'generated_paper_author(s)': 'Han, J., Kamber, B., & Pei, J.', 'generated_paper_pub_year': '2011', 'actual_paper_title': 'Data mining: Data mining concepts and techniques', 'actual_paper_author(s)': ['S Agarwal'], 'actual_paper_pub_year': '2013', 'error': ['wrong_paper_title', 'wrong_paper_author(s)', 'wrong_paper_pub_year'], 'factuality': False}, {'generated_paper_title': 'Machine Learning: Trends, Perspectives, and Prospects', 'generated_paper_author(s)': 'Kamber, B., & Pei, J.', 'generated_paper_pub_year': '2012', 'actual_paper_title': 'Machine learning: Trends, perspectives, and prospects', 'actual_paper_author(s)': ['MI Jordan', 'TM Mitchell'], 'actual_paper_pub_year': '2015', 'error': ['wrong_paper_author(s)', 'wrong_paper_pub_year'], 'factuality': False}, {'generated_paper_title': 'Machine Learning for Data Mining', 'generated_paper_author(s)': 'He, C., & Wang, Y.', 'generated_paper_pub_year': '2015', 'actual_paper_title': 'Machine learning and data mining', 'actual_paper_author(s)': ['TM Mitchell'], 'actual_paper_pub_year': '1999', 'error': ['wrong_paper_title', 'wrong_paper_author(s)', 'wrong_paper_pub_year'], 'factuality': False}], 
+        'response_level_factuality': False
+      }
+    ]
+}
+```
+
+
+
+</details>
+
+
+
+ 
+
+## ChatGPT Plugin with Factool
+* export the API keys
+* Install the package: [Installation](#installation)
+* git clone the repo: `git clone https://github.com/GAIR-NLP/factool.git`
+* `cd ./plugin_config`
+* Run the API locally: `uvicorn main:app --host 0.0.0.0 --port ${PORT:-5003}`
+* Enter plugin store of [ChatGPT Website](https://chat.openai.com/?model=gpt-4-plugins)
+* Click 'develop your own plugin' then enter the website domain `localhost:5003` under 'domain'.
+
+### Demo
+
+<details>
+<summary>Videos (click to toggle the content)</summary>
+
+Knowledge-based QA: 
+
+![Alt Text](./figs/factool_plugin_kbqa2.gif)
+
+![Alt Text](./figs/factool_plugin_kbqa3.gif)
+
+Code: 
+
+![Alt Text](./figs/factool_plugin_code.gif)
+
+Math: 
+
+![Alt Text](./figs/factool_plugin_math.gif)
+
+Scientific Literature Review: 
+
+![Alt Text](./figs/factool_plugin_scientific.gif)
+
+</details>
+
+## Citation
+Please cite our [paper](https://arxiv.org/abs/2307.13528) if you find the repository helpful.
+```
+@article{chern2023factool,
+  title={FacTool: Factuality Detection in Generative AI--A Tool Augmented Framework for Multi-Task and Multi-Domain Scenarios},
+  author={Chern, I-Chun and Chern, Steffi and Chen, Shiqi and Yuan, Weizhe and Feng, Kehua and Zhou, Chunting and He, Junxian and Neubig, Graham and Liu, Pengfei and others},
+  journal={arXiv preprint arXiv:2307.13528},
+  year={2023}
+}
+```
+
+```
+
+Contents of setup.py:
+```
+from __future__ import annotations
+
+from setuptools import setup
+
+setup()
+```
+
+Contents of setup.cfg:
+```
+[metadata]
+name = factool
+version = attr: version.__version__
+description = Factuality Detection for Generative AI
+long_description = file: README.md
+long_description_content_type = text/markdown
+url = https://github.com/GAIR-NLP/factool
+author = GAIR Research Group
+license = Apache License
+classifiers =
+    Intended Audience :: Developers
+    Topic :: Text Processing
+    Topic :: Scientific/Engineering :: Artificial Intelligence
+    License :: OSI Approved :: Apache Software License
+    Programming Language :: Python :: 3.9
+    Programming Language :: Python :: 3.10
+    Programming Language :: Python :: 3 :: Only
+
+[options]
+packages = find:
+include_package_data = True
+install_requires =
+    openai
+    PyYAML
+    asyncio
+    numpy
+    pydantic
+    pydantic-settings
+    scholarly
+    scikit-learn
+    aiohttp
+    fastapi
+    uvicorn
+    jsonlines
+
+
+[options.package_data]
+factool.utils.prompts = *.yaml
+
+
+
+[flake8]
+application-import-names = factool
+exclude = __pycache__, datasets
+extend-ignore = E203, BLK100, W503, FI10, FI11, FI12, FI13, FI14, FI15, FI16, FI17, FI58
+filename = ./factool/*.py, ./setup.py
+max-line-length = 88
+
+[isort]
+filter_files = true
+force_sort_within_sections = true
+multi_line_output = 3
+order_by_type = false
+profile = black
+src_paths = factool
+```
+
+Contents of figs/factool_plugin_kbqa.gif:
+```
+[Could not decode file contents]
+
+```
+
+Contents of figs/factool_plugin_math.gif:
+```
+[Could not decode file contents]
+
+```
+
+Contents of figs/factool_chinese.gif:
+```
+[Could not decode file contents]
+
+```
+
+Contents of figs/factool_plugin_kbqa2.gif:
+```
+[Could not decode file contents]
+
+```
+
+Contents of figs/factool_plugin_kbqa3.gif:
+```
+[Could not decode file contents]
+
+```
+
+Contents of figs/factool_japanese.gif:
+```
+[Could not decode file contents]
+
+```
+
+Contents of figs/factool.png:
+```
+[Could not decode file contents]
+
+```
+
+Contents of figs/factool_plugin_code.gif:
+```
+[Could not decode file contents]
+
+```
+
+Contents of figs/factool_plugin_scientific.gif:
+```
+[Could not decode file contents]
+
+```
+
+Contents of example/readme.md:
+```
+# An example of med_doc_qa
+## Input data
+### dialogue
+> 医生：你好，我是你的主治医生。请详细描述一下你的不适症状，包括症状的持续时间、频率以及伴随的其他感觉 </br>
+患者：我最近总感觉头晕，有时候还会有心慌的感觉，这种情况大概持续了一个月左右，每周会出现两三次。</br>
+医生：你有测量过血压吗？如果有，能告诉我最近一次的测量结果吗？</br>
+患者：我自己在家测过，大概在150/100mmHg左右。</br>
+医生：你的血压偏高，这可能是引起你头晕和心慌的原因。你有没有其他的不适症状，比如头痛、胸闷、呼吸困难或者视物模糊等？</br>
+患者：我有时候会有点头痛，但是并不严重，胸闷和呼吸困难倒是没有，视物也没有模糊。</br>
+医生：你有没有长期服用降压药或者有高血压的病史？你的家族中有没有高血压病史？</br>
+患者：我父母都有高血压，我自己以前也有过，但是后来控制得还不错，就没有再吃药了。</br>
+医生：你的生活习惯怎么样？比如饮食、运动、睡眠等。你的工作压力大吗？有没有经常熬夜或者加班的情况？</br>
+患者：我平时工作比较忙，经常加班，饮食不是很规律，运动也比较少，有时候晚上睡觉也不是很好。</br>
+医生：你的生活习惯可能是导致血压升高的一个重要因素，建议你调整一下。你有没有吸烟、饮酒的习惯？</br>
+患者：我有吸烟，但是饮酒就很少。</br>
+医生：吸烟也是导致血压升高的一个重要因素，建议你尽量戒烟。你的血压已经达到了高血压的标准，需要及时治疗。高血压是心脑血管疾病的重要危险因素，如果不及时控制，可能会引发心脏病、脑卒中等严重疾病。</br>
+患者：那我应该怎么做呢？</br>
+医生：首先，你需要调整生活习惯，规律饮食，适当运动，保证充足的睡眠，尽量戒烟。其次，你需要定期测量血压，如果血压持续偏高，可能需要服用降压药。我会为你制定一个详细的治疗方案，包括药物治疗和生活方式的调整，我们会定期复查，根据你的病情调整治疗方案。</br>
+患者：好的，我知道了，谢谢医生。
+
+### wrong medical record
+> 主诉：头晕、心慌，持续一个月，每周出现两三次，偶尔伴有轻微头痛。</br>
+现病史：患者最近一个月内经常感到头晕和心慌，每周出现两三次，自测血压160/110mmHg，偶尔伴有轻微头痛，无胸闷、呼吸困难等症状。</br>
+既往史：患者有高血压病史，父母均有高血压，患者曾因血压控制良好而停药，无糖尿病、心脏病等病史。</br>
+个人史：患者工作压力大，经常加班，饮食不规律，运动少，睡眠质量差，有吸烟习惯，饮酒少。</br>
+诊断：高血压病，考虑为二级高血压。</br>
+治疗建议：</br>
+1.调整生活习惯，规律饮食，适当运动，保证充足的睡眠，尽量戒烟。</br>
+2.定期测量血压，如果血压持续偏高，可能需要服用降压药。</br>
+3.制定详细的治疗方案，包括药物治疗和生活方式的调整，定期复查，根据病情调整治疗方案。</br>
+4.建议服用降压药物，如无不适，继续服用。
+
+### wrong points
+1. 现病史中“160/110mmHg”为错误信息
+2. 既往史中“无糖尿病、心脏病等病史”为多余信息。
+3. 诊断中“考虑为二级高血压”为多余信息。
+4. 治疗建议中“建议服用降压药物，如无不适，继续服用”为多余信息
+
+### factool claim level factuality output(using the code snippet example.py)
+~~~python
+[{"claim": "主诉是头晕、心慌，持续一个月，每周出现两三次，偶尔伴有轻微头痛", "reasoning": "给定的文本与提供的证据完全一致。文本中的信息，包括患者的主诉（头晕、心慌，持续一个月，每周出现两三次，偶尔伴有轻微头痛）都在证据中得到了确认。", "error": "None", "correction": "None", "factuality": true}, 
+{"claim": "现病史包含最近一个月内经常感到头晕和心慌，每周出现两三次", "reasoning": "根据提供的证据，患者确实描述了他在过去一个月内经常感到头晕和心慌，每周出现两三次的症状。这与给定的文本完全一致。", "error": "None", "correction": "None", "factuality": true}, 
+{"claim": "现病史包含自测血压160/110mmHg", "reasoning": "根据提供的证据，患者自测的血压值是150/100mmHg，而不是文本中所述的160/110mmHg。", "error": "文本中的血压值与证据中的血压值不符。", "correction": "现病史包含自测血压150/100mmHg", "factuality": false}, 
+{"claim": "现病史包含偶尔伴有轻微头痛，无胸闷、呼吸困难等症状", "reasoning": "根据证据，患者确实有偶尔的轻微头痛，但并没有胸闷和呼吸困难的症状。因此，给定的文本是事实。", "error": "None", "correction": "None", "factuality": true}, 
+{"claim": "既往史包含有高血压病史，父母均有高血压", "reasoning": "根据提供的证据，患者的既往史确实包含有高血压病史，他的父母也都有高血压。这与给定的文本中的信息完全一致。", "error": "None", "correction": "None", "factuality": true}, 
+{"claim": "既往史包含曾因血压控制良好而停药，无糖尿病、心脏病等病史", "reasoning": "根据证据，患者曾经有过高血压，但后来控制得还不错，所以停止了药物治疗。这与文本中的描述一致。然而，文本中的描述“无糖尿病、心脏病等病史”在证据中并未提及，因此无法确认其准确性。", "error": "文本中的“无糖尿病、心脏病等病史”是擅自增加的信息，证据中并未提及。", "correction": "既往史包含曾因血压控制良好而停药", "factuality": false}, 
+{"claim": "个人史包含工作压力大，经常加班，饮食不规律，运动少，睡眠质量差，有吸烟习惯，饮酒少", "reasoning": "根据提供的证据，患者的个人史包括工作压力大，经常加班，饮食不规律，运动少，睡眠质量差，有吸烟习惯，饮酒少。这与给定的文本完全一致。", "error": "None", "correction": "None", "factuality": true}, 
+{"claim": "诊断为高血压病，考虑为二级高血压", "reasoning": "根据提供的证据，患者的血压测量结果为150/100mmHg，医生也确认了患者的血压偏高，这符合高血压的诊断标准。但是，证据中并没有明确指出患者的高血压是二级高血压。", "error": "文本中的错误是擅自增加了对话中没出现的信息，即患者的高血压被诊断为二级高血压。", "correction": "诊断为高血压病", "factuality": false}, 
+{"claim": "治疗建议包括调整生活习惯，规律饮食，适当运动，保证充足的睡眠，尽量戒烟", "reasoning": "给定的文本是事实的。这是因为在证据中，医生确实建议患者调整生活习惯，规律饮食，适当运动，保证充足的睡眠，尽量戒烟。这些都是医生为了帮助患者控制高血压而给出的建议。", "error": "None", "correction": "None", "factuality": true}, 
+{"claim": "治疗建议包括定期测量血压，如果血压持续偏高，可能需要服用降压药", "reasoning": "给定的文本与提供的证据完全一致。在证据中，医生确实建议患者定期测量血压，并且如果血压持续偏高，可能需要服用降压药。", "error": "None", "correction": "None", "factuality": true}, 
+{"claim": "治疗建议包括制定详细的治疗方案，包括药物治疗和生活方式的调整，定期复查，根据病情调整治疗方案", "reasoning": "给定的文本与提供的证据完全一致。在证据中，医生确实为患者制定了一个详细的治疗方案，包括药物治疗和生活方式的调整，并且提到了定期复查，根据病情调整治疗方案。", "error": "None", "correction": "None", "factuality": true}, 
+{"claim": "治疗建议包括建议服用降压药物，如无不适，继续服用", "reasoning": "根据提供的证据，医生确实建议患者如果血压持续偏高，可能需要服用降压药。同时，医生也建议患者在没有不适的情况下继续服用。因此，给定的文本是事实。", "error": "None", "correction": "None", "factuality": true}]
+~~~
+### the revised medical record based on the factuality test output
+> 主诉：头晕、心慌，持续一个月，每周出现两三次，偶尔伴有轻微头痛。</br>现病史：患者最近一个月内经常感到头晕和心慌，自测血压150/100mmHg，无胸闷、呼吸困难等症状。</br>既往史：患者有高血压病史，父母均有高血压，曾因血压控制良好而停药。</br>个人史：患者工作压力大，经常加班，饮食不规律，运动少，睡眠质量差，有吸烟习惯，饮酒少。</br>诊断：高血压病。</br>治疗建议：</br>1.调整生活习惯，规律饮食，适当运动，保证充足的睡眠，尽量戒烟。</br>2.定期测量血压，如果血压持续偏高，可能需要服用降压药。</br>3.制定详细的治疗方案，包括药物治疗和生活方式的调整，定期复查，根据病情调整治疗方案。</br>4.建议服用降压药物，如无不适，继续服用。
+
+共修正三处错误，一处错误未识别
+
+```
+
+Contents of example/example.py:
+```
+'''
+Remember to export you API keys first.
+export OPENAI_API_KEY=...
+export SERPER_API_KEY=...
+export SCRAPER_API_KEY=...
+'''
+
+from factool import Factool
+
+factool_instance = Factool("gpt-4")
+
+# one example input for each category.
+inputs = [
+            {
+                "prompt": "Introduce Graham Neubig",
+                "response": "Graham Neubig is a professor at MIT",
+                "category": "kbqa"
+            },
+            {
+                "prompt": "def get_max_triples(n): \"\"\" You are given a positive integer n. You have to create an integer array a of length n. For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1. Return the number of triples (a[i], a[j], a[k]) of a where i < j < k, and a[i] + a[j] + a[k] is a multiple of 3. Example : Input: n = 5 Output: 1 Explanation: a = [1, 3, 7, 13, 21] The only valid triple is (1, 7, 13). \"\"\" Now implement the function get_max_triples using Python",
+                "response": "def get_max_triples(n):\n    a = [i * i - i + 1 for i in range(1, n+1)]\n    count = 0\n    for i in range(n-2):\n        for j in range(i+1, n-1):\n            for k in range(j+1, n):\n                if (a[i] + a[j] + a[k]) % 3 == 0:\n                    count += 1\n    return count\n\nprint(get_max_triples(5)) # Output: 1",
+                "category": "code",
+                "entry_point": "get_max_triples"
+            },
+            {
+                "prompt": "Stephen placed an online order for groceries.  His final bill came to $7023116.  Because this was through a delivery vendor, they tacked on a 25% fee to his final total and charged him $3.00 in delivery fees.  Stephen also added a $4.00 tip.  After the extra fees, what was the final price of Stephen's groceries?",
+                "response": "Okay, here are the steps to solve this:\n* Stephen's initial grocery bill was $7023116\n* The delivery vendor charged a 25% fee on top of that. 25% of $7023116 is 0.25 * $7023116 = $1755779\n* They also charged a flat $3 delivery fee\n* Stephen added a $4 tip\n* So the total charges were:\n    * Initial groceries: $7023116\n    * 25% fee: $1755779\n    * Delivery fee: $3 \n    * Tip: $4\n* Adding all that up, the total final price was $7023116 + $1755779 + $3 + $4 = $8779902\n\nSo the final price of Stephen's groceries was $8779902",
+                "category": "math"
+            },
+            {
+                "prompt": "Detail how machine learning algorithms are applied in data"
+                      " analytics and the processes involved in training"
+                      " these algorithms. Please cite relevant research papers"
+                      " or textbooks to support your points, including the author's"
+                      " name, the title of the work, and the year of publication.",
+                "response": "Machine learning algorithms play a crucial role in data"
+                        " analytics. They are used to extract insights and knowledge"
+                        " from large datasets, which can be used to make informed"
+                        " decisions and predictions. The following are the processes"
+                        " involved in training machine learning algorithms:\n\n1. "
+                        "Data Preprocessing: The first step in training a machine"
+                        " learning algorithm is to preprocess the data. This involves"
+                        " cleaning the data, handling missing values, "
+                        "encoding categorical variables, and scaling the data. "
+                        "The aim of preprocessing is to ensure that the data is in"
+                        " a format that can be used by the machine learning algorithm.\n2. Feature Selection: Once the data has been preprocessed, the next step is to select the relevant features that will be used to train the machine learning algorithm. This involves identifying the features that are most important for predicting the target variable. Feature selection can be done using various techniques, such as filter methods, wrapper methods, and embedded methods.\n3. Model Selection: After feature selection, the next step is to select the appropriate machine learning algorithm to use. There are various types of machine learning algorithms, such as supervised learning, unsupervised learning, and reinforcement learning. The choice of algorithm depends on the nature of the problem and the type of data available.\n4. Training the Model: Once the model has been selected, the next step is to train the machine learning algorithm using the preprocessed data. This involves using a training set of data to optimize the parameters of the model so that it can accurately predict the target variable.\n5. Model Evaluation: After the model has been trained, the next step is to evaluate its performance. This involves testing the model on a separate test set of data and measuring its accuracy, precision, recall, and other performance metrics.\n6. Model Deployment: Once the model has been evaluated and fine-tuned, it can be deployed in a production environment. This involves integrating the model into a larger system or workflow, and monitoring its performance over time.\n\nResearch papers and textbooks that support the above points include:\n\n* \"An Introduction to Machine Learning\" by Alpaydin, B., (2010) which provides a comprehensive overview of machine learning algorithms and their applications.\n* \"Data Mining: Concepts and Techniques\" by Han, J., Kamber, B., & Pei, J., (2011) which provides a detailed introduction to data mining and its applications.\n* \"Machine Learning: Trends, Perspectives, and Prospects\" by Kamber, B., & Pei, J., (2012) which provides an overview of the current trends and future prospects of machine learning.\n* \"Machine Learning for Data Mining\" by He, C., & Wang, Y., (2015) which provides an in-depth introduction to machine learning algorithms and their applications in data mining.",
+                "category": "scientific"
+            },
+            {
+                "prompt":"""医生：你好，我是你的主治医生。请详细描述一下你的不适症状，包括症状的持续时间、频率以及伴随的其他感觉。
+患者：我最近总感觉头晕，有时候还会有心慌的感觉，这种情况大概持续了一个月左右，每周会出现两三次。
+医生：你有测量过血压吗？如果有，能告诉我最近一次的测量结果吗？
+患者：我自己在家测过，大概在150/100mmHg左右。
+医生：你的血压偏高，这可能是引起你头晕和心慌的原因。你有没有其他的不适症状，比如头痛、胸闷、呼吸困难或者视物模糊等？
+患者：我有时候会有点头痛，但是并不严重，胸闷和呼吸困难倒是没有，视物也没有模糊。
+医生：你有没有长期服用降压药或者有高血压的病史？你的家族中有没有高血压病史？
+患者：我父母都有高血压，我自己以前也有过，但是后来控制得还不错，就没有再吃药了。
+医生：你的生活习惯怎么样？比如饮食、运动、睡眠等。你的工作压力大吗？有没有经常熬夜或者加班的情况？
+患者：我平时工作比较忙，经常加班，饮食不是很规律，运动也比较少，有时候晚上睡觉也不是很好。
+医生：你的生活习惯可能是导致血压升高的一个重要因素，建议你调整一下。你有没有吸烟、饮酒的习惯？
+患者：我有吸烟，但是饮酒就很少。
+医生：吸烟也是导致血压升高的一个重要因素，建议你尽量戒烟。你的血压已经达到了高血压的标准，需要及时治疗。高血压是心脑血管疾病的重要危险因素，如果不及时控制，可能会引发心脏病、脑卒中等严重疾病。
+患者：那我应该怎么做呢？
+医生：首先，你需要调整生活习惯，规律饮食，适当运动，保证充足的睡眠，尽量戒烟。其次，你需要定期测量血压，如果血压持续偏高，可能需要服用降压药。我会为你制定一个详细的治疗方案，包括药物治疗和生活方式的调整，我们会定期复查，根据你的病情调整治疗方案。
+患者：好的，我知道了，谢谢医生。""",
+                "response":"""主诉：头晕、心慌，持续一个月，每周出现两三次，偶尔伴有轻微头痛。
+现病史：患者最近一个月内经常感到头晕和心慌，每周出现两三次，自测血压160/110mmHg，偶尔伴有轻微头痛，无胸闷、呼吸困难等症状。
+既往史：患者有高血压病史，父母均有高血压，患者曾因血压控制良好而停药，无糖尿病、心脏病等病史。
+个人史：患者工作压力大，经常加班，饮食不规律，运动少，睡眠质量差，有吸烟习惯，饮酒少。
+诊断：高血压病，考虑为二级高血压。
+治疗建议：
+1.调整生活习惯，规律饮食，适当运动，保证充足的睡眠，尽量戒烟。
+2.定期测量血压，如果血压持续偏高，可能需要服用降压药。
+3.制定详细的治疗方案，包括药物治疗和生活方式的调整，定期复查，根据病情调整治疗方案。
+4.建议服用降压药物，如无不适，继续服用。""",
+                "category": "med_doc_qa",
+            }
+]
+
+response_list = factool_instance.run(inputs)
+
+print(response_list)
+```
+
+Contents of factool/factool.py:
+```
+import asyncio
+import copy
+import pdb
+
+from factool.knowledge_qa.pipeline import knowledge_qa_pipeline
+from factool.code.pipeline import code_pipeline
+from factool.math.pipeline import math_pipeline
+from factool.scientific.pipeline import scientific_pipeline
+from factool.med_doc_qa.pipeline import med_doc_qa_pipeline
+
+class Factool():
+    def __init__(self, foundation_model):
+        self.foundation_model = foundation_model
+        self.pipelines = {
+                            "kbqa_online": knowledge_qa_pipeline(
+                                foundation_model, 10, "online"
+                            ),
+                            "code": code_pipeline(
+                                foundation_model, 3, 3
+                            ),
+                            "math": math_pipeline(
+                                foundation_model
+                            ),
+                            "scientific": scientific_pipeline(
+                                foundation_model
+                            ),
+                            "med_doc_qa": med_doc_qa_pipeline(
+                                foundation_model
+                            )
+                        }
+
+    def run(self, inputs):
+        outputs = copy.deepcopy(inputs)
+        batches = []
+        current_category = inputs[0]['category']
+        current_search_type = inputs[0].get('search_type', None)
+        current_data_link = inputs[0].get('data_link', None)
+        current_embedding_link = inputs[0].get('embedding_link', None)
+        current_batch = []
+
+        for input in inputs:
+            if (input['category'] == current_category != 'kbqa') \
+                or (input['category'] == current_category == 'kbqa' and input.get('search_type', None) == current_search_type == "online") \
+                    or (input['category'] == current_category == 'kbqa' and input.get('search_type', None) == current_search_type == "local"\
+                        and input.get('data_link', None)==current_data_link and input.get('embedding_link', None)==current_embedding_link):
+                current_batch.append(input)
+            else:
+                batches.append(current_batch)
+                current_batch = [input]
+                current_category = input['category']
+                current_search_type = input.get('search_type', None)
+                current_data_link = input.get('data_link', None)
+                current_embedding_link = input.get('embedding_link', None)
+                    
+        batches.append(current_batch)  # append the last batch
+
+        index = 0
+        for batch in batches:
+            if not batch: continue
+            category = batch[0]['category']
+            search_type = batch[0].get('search_type', None)
+            if category == 'code':
+                batch_results = asyncio.run(
+                    self.pipelines[category].run_with_tool_api_call(
+                        [sample['prompt'] for sample in batch],
+                        [sample['response'] for sample in batch],
+                        [sample['entry_point'] for sample in batch]
+                    )
+                )
+            elif category == 'kbqa':
+                if search_type is None or search_type == "online":
+                    batch_results = asyncio.run(
+                        self.pipelines[category+"_online"].run_with_tool_api_call(
+                            [sample['prompt'] for sample in batch],
+                            [sample['response'] for sample in batch],
+                        )
+                    )
+                else:
+                    batch_results = asyncio.run(
+                        knowledge_qa_pipeline(
+                            self.foundation_model,2,"local",batch[0].get("data_link"),batch[0].get("embedding_link")
+                        ).run_with_tool_api_call(
+                            [sample['prompt'] for sample in batch],
+                            [sample['response'] for sample in batch],
+                        )
+                    )
+            else:
+                batch_results = asyncio.run(
+                    self.pipelines[category].run_with_tool_api_call(
+                        [sample['prompt'] for sample in batch],
+                        [sample['response'] for sample in batch]
+                    )
+                )
+            for result in batch_results:
+                outputs[index].update(result)
+                index += 1
+        
+        # calculate average response_level_factuality
+        total_response_factuality = sum(output['response_level_factuality'] == True for output in outputs)
+        avg_response_level_factuality = total_response_factuality / len(outputs)
+
+        # calculate average claim_level_factuality
+        num_claims = 0
+        total_claim_factuality = 0
+        for output in outputs:
+            num_claims += len(output['claim_level_factuality'])
+            if output['category'] == 'kbqa':
+                if output['claim_level_factuality'] != []:
+                    total_claim_factuality += sum(claim['factuality'] == True if claim != None else 0 for claim in output['claim_level_factuality'])
+                else:
+                    total_claim_factuality += 0
+            elif output['category'] == 'code':
+                total_claim_factuality += (output['claim_level_factuality'] == True)
+            elif output['category'] == 'math':
+                total_claim_factuality += sum(claim_factuality == True for claim_factuality in output['claim_level_factuality'])
+            elif output['category'] == 'scientific':
+                total_claim_factuality += sum(claim['factuality'] == True for claim in output['claim_level_factuality'])
+
+        avg_claim_level_factuality = total_claim_factuality / num_claims
+
+        return {"average_claim_level_factuality": avg_claim_level_factuality, "average_response_level_factuality": avg_response_level_factuality, "detailed_information": outputs}
+
+    async def run_for_plugin(self, inputs):
+        outputs = copy.deepcopy(inputs)
+
+        batches = []
+        current_category = inputs[0]['category']
+        current_batch = []
+
+        for input in inputs:
+            if input['category'] == current_category:
+                current_batch.append(input)
+            else:
+                batches.append(current_batch)
+                current_batch = [input]
+                current_category = input['category']
+                    
+        batches.append(current_batch)  # append the last batch
+
+        index = 0
+        for batch in batches:
+            category = batch[0]['category']
+            if category == 'code':
+                batch_results = await self.pipelines[category].run_with_tool_api_call(
+                    [sample['prompt'] for sample in batch],
+                    [sample['response'] for sample in batch],
+                    [sample['entry_point'] for sample in batch],
+                )
+            else:
+                batch_results = await self.pipelines[category].run_with_tool_api_call(
+                    [sample['prompt'] for sample in batch],
+                    [sample['response'] for sample in batch],
+                )
+            for result in batch_results:
+                outputs[index].update(result)
+                index += 1
+        
+        return outputs
+```
+
+Contents of factool/tasks.py:
+```
+"""Definition of different types of tasks."""
+from __future__ import annotations
+
+from enum import Enum
+
+
+class TaskType(str, Enum):
+    """Task types available in this tool."""
+
+    kbqa = "kbqa"
+    math = "math"
+    code = "code"
+    sci = "sci"
+
+    @staticmethod
+    def list() -> list[str]:
+        """Obtains string representations of all values.
+        Returns:
+            List of all values in str.
+        """
+        return list(map(lambda c: c.value, TaskType))
+```
+
+Contents of factool/env_config.py:
+```
+"""Environment configuration for Factool. """
+import pydantic
+from pydantic_settings import BaseSettings
+
+
+class FactoolEnvConfig(BaseSettings, frozen=True):
+    """Environment configuration for Factool."""
+
+    openai_api_key: str = pydantic.Field(
+        default=None,
+        env="OPENAI_API_KEY",
+        description="API key for OpenAI",
+    )
+
+    serper_api_key: str = pydantic.Field(
+        default=None,
+        env="SERPER_API_KEY",
+        description="Key for Serper",
+    )
+
+    scraper_api_key: str = pydantic.Field(
+        default=None,
+        env="SCRAPER_API_KEY",
+        description="Key for Scraper",
+    )
+
+factool_env_config = FactoolEnvConfig()
+
+```
+
+Contents of factool/__init__.py:
+```
+from factool.factool import Factool
+from factool.tasks import TaskType
+```
+
+Contents of factool/knowledge_qa/__init__.py:
+```
+
+```
+
+Contents of factool/knowledge_qa/google_serper.py:
+```
+# The following code was adapted from https://github.com/hwchase17/langchain/blob/master/langchain/utilities/google_serper.py
+
+"""Util that calls Google Search using the Serper.dev API."""
+import pdb
+import requests
+import asyncio
+import aiohttp
+import yaml
+import os
+
+from factool.env_config import factool_env_config
+
+# env
+# serper_api_key = factool_env_config.serper_api_key
+
+
+class GoogleSerperAPIWrapper():
+    """Wrapper around the Serper.dev Google Search API.
+    You can create a free API key at https://serper.dev.
+    To use, you should have the environment variable ``SERPER_API_KEY``
+    set with your API key, or pass `serper_api_key` as a named parameter
+    to the constructor.
+    Example:
+        .. code-block:: python
+            from langchain import GoogleSerperAPIWrapper
+            google_serper = GoogleSerperAPIWrapper()
+    """
+    def __init__(self, snippet_cnt = 10) -> None:
+        self.k = snippet_cnt
+        self.gl = "us"
+        self.hl = "en"
+        self.serper_api_key = os.environ.get("SERPER_API_KEY", None)
+        assert self.serper_api_key is not None, "Please set the SERPER_API_KEY environment variable."
+        assert self.serper_api_key != '', "Please set the SERPER_API_KEY environment variable."
+
+    async def _google_serper_search_results(self, session, search_term: str, gl: str, hl: str) -> dict:
+        headers = {
+            "X-API-KEY": self.serper_api_key or "",
+            "Content-Type": "application/json",
+        }
+        params = {"q": search_term, "gl": gl, "hl": hl}
+        async with session.post(
+            "https://google.serper.dev/search", headers=headers, params=params, raise_for_status=True
+        ) as response:
+            return await response.json()
+    
+    def _parse_results(self, results):
+        snippets = []
+
+        if results.get("answerBox"):
+            answer_box = results.get("answerBox", {})
+            if answer_box.get("answer"):
+                element = {"content":answer_box.get("answer"),"source":"None"}
+                return [element]
+            elif answer_box.get("snippet"):
+                element = {"content":answer_box.get("snippet").replace("\n", " "),"source":"None"}
+                return [element]
+            elif answer_box.get("snippetHighlighted"):
+                element = {"content":answer_box.get("snippetHighlighted"),"source":"None"}
+                return [element]
+            
+        if results.get("knowledgeGraph"):
+            kg = results.get("knowledgeGraph", {})
+            title = kg.get("title")
+            entity_type = kg.get("type")
+            if entity_type:
+                element = {"content":f"{title}: {entity_type}","source":"None"}
+                snippets.append(element)
+            description = kg.get("description")
+            if description:
+                element = {"content":description,"source":"None"}
+                snippets.append(element)
+            for attribute, value in kg.get("attributes", {}).items():
+                element = {"content":f"{attribute}: {value}","source":"None"}
+                snippets.append(element)
+
+        for result in results["organic"][: self.k]:
+            if "snippet" in result:
+                element = {"content":result["snippet"],"source":result["link"]}
+                snippets.append(element)
+            for attribute, value in result.get("attributes", {}).items():
+                element = {"content":f"{attribute}: {value}","source":result["link"]}
+                snippets.append(element)
+
+        if len(snippets) == 0:
+            element = {"content":"No good Google Search Result was found","source":"None"}
+            return [element]
+        
+        # keep only the first k snippets
+        snippets = snippets[:int(self.k / 2)]
+
+        return snippets
+    
+    async def parallel_searches(self, search_queries, gl, hl):
+        async with aiohttp.ClientSession() as session:
+            tasks = [self._google_serper_search_results(session, query, gl, hl) for query in search_queries]
+            search_results = await asyncio.gather(*tasks, return_exceptions=True)
+            return search_results
+
+    async def run(self, queries):
+        """Run query through GoogleSearch and parse result."""
+        flattened_queries = []
+
+        for sublist in queries:
+            if sublist is None:
+                sublist = ['None', 'None']
+            for item in sublist:
+                flattened_queries.append(item)
+
+        results = await self.parallel_searches(flattened_queries, gl=self.gl, hl=self.hl)
+        snippets_list = []
+        for i in range(len(results)):
+            snippets_list.append(self._parse_results(results[i]))
+        snippets_split = [snippets_list[i] + snippets_list[i+1] for i in range(0, len(snippets_list), 2)]
+        return snippets_split
+    
+if __name__ == "__main__":
+    search = GoogleSerperAPIWrapper()
+    print(asyncio.run(search.run("What is the capital of the United States?")))
+```
+
+Contents of factool/knowledge_qa/pipeline.py:
+```
+import json
+import yaml
+import os
+import time
+import math
+import pdb
+from typing import List, Dict
+
+from factool.knowledge_qa.tool import google_search
+from factool.knowledge_qa.tool import local_search
+from factool.utils.base.pipeline import pipeline
+
+class knowledge_qa_pipeline(pipeline):
+    def __init__(self, foundation_model, snippet_cnt, search_type, data_link=None, Embed_link=None):
+        super().__init__('knowledge_qa', foundation_model)
+        if(search_type == 'online'):
+            self.tool = google_search(snippet_cnt = snippet_cnt)
+        elif(search_type == 'local'):
+            self.tool = local_search(snippet_cnt = snippet_cnt, data_link=data_link, embedding_link=Embed_link)
+        with open(os.path.join(self.prompts_path, "claim_extraction.yaml"), 'r') as file:
+            data = yaml.load(file, Loader=yaml.FullLoader)
+        self.claim_prompt = data['knowledge_qa']
+
+        with open(os.path.join(self.prompts_path, 'query_generation.yaml'), 'r') as file:
+            data = yaml.load(file, Loader=yaml.FullLoader)
+        self.query_prompt = data['knowledge_qa']
+
+        with open(os.path.join(self.prompts_path, 'agreement_verification.yaml'), 'r') as file:
+            data = yaml.load(file, Loader=yaml.FullLoader)
+        self.verification_prompt = data['knowledge_qa']
+    
+    async def _claim_extraction(self, responses):
+        messages_list = [
+            [
+                {"role": "system", "content": self.claim_prompt['system']},
+                {"role": "user", "content": self.claim_prompt['user'].format(input=response)},
+            ]
+            for response in responses
+        ]
+        return await self.chat.async_run(messages_list, List)
+    
+    async def _query_generation(self, claims):
+        if claims == None:
+            return ['None']
+        messages_list = [
+            [
+                {"role": "system", "content": self.query_prompt['system']},
+                {"role": "user", "content": self.query_prompt['user'].format(input=claim['claim'] if 'claim' in claim else '')},
+            ]
+            for claim in claims
+        ]
+        return await self.chat.async_run(messages_list, List)
+
+    async def _verification(self, claims, evidences):
+        messages_list = [
+            [
+                {"role": "system", "content": self.verification_prompt['system']},
+                {"role": "user", "content": self.verification_prompt['user'].format(claim=claim['claim'], evidence=str(evidence))},
+            ]
+            for claim, evidence in zip(claims, evidences)
+        ]
+        return await self.chat.async_run(messages_list, dict)
+    
+    async def run_with_tool_live(self, responses):
+        claims_in_responses = await self._claim_extraction(responses)
+        queries_in_responses = []
+        evidences_in_responses = []
+        sources_in_responses = []
+        verifications_in_responses = []
+        for claims_in_response in claims_in_responses:
+            queries = await self._query_generation(claims_in_response)
+            queries_in_responses.append(queries)
+            search_outputs_for_claims = await self.tool.run(queries)
+            evidences = [[output['content'] for output in search_outputs_for_claim] for search_outputs_for_claim in search_outputs_for_claims]
+            evidences_in_responses.append(evidences)
+            sources = [[output['source'] for output in search_outputs_for_claim] for search_outputs_for_claim in search_outputs_for_claims]
+            sources_in_responses.append(sources)
+            verifications = await self._verification(claims_in_response, evidences)
+            verifications_in_responses.append(verifications)
+
+        return claims_in_responses, queries_in_responses, evidences_in_responses, sources_in_responses, verifications_in_responses
+    
+    async def run_with_tool_live_without_claim_extraction(self, claims):
+        queries = await self._query_generation(claims)
+        evidences = await self.tool.run(queries)
+
+        final_response = await self._verification(claims, evidences)
+        for i in range(len(final_response)):
+            if final_response[i] != None:
+                final_response[i]['queries'] = queries[i]
+                final_response[i]['evidences'] = evidences[i]
+
+        return final_response
+    
+    async def run_with_tool_api_call(self, prompts, responses):
+        batch_size = 5
+        num_batches = math.ceil(len(prompts) / batch_size)
+
+        self.sample_list = [{"prompt": prompt, "response": response, "category": 'kbqa'} for prompt, response in zip(prompts, responses)]
+
+        for i in range(num_batches):
+            print(i)
+            batch_start = i * batch_size
+            batch_end = min((i + 1) * batch_size, len(responses))
+
+            claims_in_responses, queries_in_responses, evidences_in_responses, sources_in_responses, verifications_in_responses = await self.run_with_tool_live(responses[batch_start:batch_end])
+
+            for j, (claims_in_response, queries_in_response, evidences_in_response, sources_in_response, verifications_in_response) in enumerate(zip(claims_in_responses, queries_in_responses, evidences_in_responses, sources_in_responses, verifications_in_responses)):
+                index = batch_start + j
+                
+                if claims_in_response != None:
+                    for k, claim in enumerate(claims_in_response):
+                        if verifications_in_response[k] != None:
+                            if claim != None:
+                                verifications_in_response[k].update({'claim': claim['claim']})
+                            else:
+                                verifications_in_response[k].update({'claim': 'None'})
+
+                evidences_with_source = []
+                for evidence, source in zip(evidences_in_response, sources_in_response):
+                    evidences_with_source.append({'evidence': evidence, 'source': source})
+                self.sample_list[index].update({
+                    'claims': claims_in_response,
+                    'queries': queries_in_response,
+                    # 'evidences': evidences_in_response,
+                    # 'sources': sources_in_response,
+                    'evidences': evidences_with_source,
+                    'claim_level_factuality': verifications_in_response,
+                    'response_level_factuality': all([verification['factuality'] if verification != None else True for verification in verifications_in_response])
+                })
+
+        return self.sample_list
+    
+    async def run_with_tool_dataset(self, annotated_dataset_path: str, with_tool_classified_dataset_path: str, rerun: bool = False, rerun_indices: list = []):
+        data_path = with_tool_classified_dataset_path if rerun else annotated_dataset_path
+        with open(data_path, 'r') as f:
+            data = [json.loads(line) for line in f]
+        self.sample_list = data if rerun else [claim for sample in data for claim in sample['claims']]
+        rerun_elements = self.sample_list if not rerun else [self.sample_list[i] for i in rerun_indices]
+
+        batch_size = 4
+        num_batches = math.ceil(len(rerun_elements) / batch_size) # 5
+        
+        for i in range(num_batches):
+            print(i)
+            batch_start = i * batch_size
+            batch_end = min((i + 1) * batch_size, len(rerun_elements))
+
+            responses = await self.run_with_tool_live_without_claim_extraction(rerun_elements[batch_start:batch_end])
+
+            for j, response in enumerate(responses):
+                index = batch_start + j if rerun == False else rerun_indices[batch_start + j]
+                if response is None:
+                    self.sample_list[index].update({
+                        'with_tool_classification': 'None',
+                        'with_tool_reasoning': 'None',
+                        'queries': 'None',
+                        'evidences': 'None'
+                    })
+                else:
+                    self.sample_list[index].update({
+                        'with_tool_classification': response.get('factuality', 'None'),
+                        'with_tool_reasoning': response.get('reasoning', 'None'),
+                        'queries': response.get('queries', 'None'),
+                        'evidences': response.get('evidences', 'None')
+                    })
+        
+            # save everything after each batch to prevent data loss
+            with open(with_tool_classified_dataset_path, 'w') as f:
+                for item in self.sample_list:
+                    json_str = json.dumps(item)
+                    f.write(json_str + '\n')
+
+    async def run_self_check_live(self, fewshot, batch):
+        user_prompt_key = 'user_3_shot_CoT' if fewshot else 'user_zero_shot_CoT'
+        messages_list = [
+            [
+                {"role": "system", "content": self.self_check_prompt['system']},
+                {"role": "user", "content": self.self_check_prompt[user_prompt_key].format(claim=response['claim'])},
+            ]
+            for response in batch
+        ]
+        return await self.chat.async_run(messages_list, Dict)
+
+    async def run_self_check_dataset(self, annotated_dataset_path: str, self_check_classified_dataset_path: str, fewshot: bool = False, rerun: bool = False, rerun_indices: list = []):
+        data_path = annotated_dataset_path if not rerun else self_check_classified_dataset_path
+        with open(data_path, 'r') as f:
+            data = [json.loads(line) for line in f]
+        self.sample_list = data if rerun else [claim for sample in data for claim in sample['claims']]
+        rerun_elements = self.sample_list if not rerun else [self.sample_list[i] for i in rerun_indices]
+
+        batch_size = 10
+        num_batches = math.ceil(len(rerun_elements) / batch_size)
+
+        for i in range(num_batches):
+            print(i)
+            batch_start = i * batch_size
+            batch_end = min((i + 1) * batch_size, len(rerun_elements))
+            batch = rerun_elements[batch_start:batch_end]
+
+            responses = await self.run_self_check_live(fewshot, batch)
+            for j, response in enumerate(responses):
+                index = batch_start + j if not rerun else rerun_indices[batch_start + j]
+                if response is None:
+                    self.sample_list[index].update({
+                        'self_check_classification': 'None',
+                        'self_check_reasoning': 'None'
+                    })
+                else:
+                    self.sample_list[index].update({
+                        'self_check_classification': response.get('factuality', 'None'),
+                        'self_check_reasoning': response.get('reasoning', 'None')
+                    })
+
+            # save everything after each batch to prevent data loss
+            with open(self_check_classified_dataset_path, 'w') as f:
+                for item in self.sample_list:
+                    json_str = json.dumps(item)
+                    f.write(json_str + '\n')
+
+```
+
+Contents of factool/knowledge_qa/tool.py:
+```
+import asyncio
+from factool.knowledge_qa.google_serper import GoogleSerperAPIWrapper
+from factool.utils.openai_wrapper import OpenAIEmbed
+import json
+import os
+import numpy as np
+import jsonlines
+import pdb
+
+class google_search():
+    def __init__(self, snippet_cnt):
+        self.serper = GoogleSerperAPIWrapper(snippet_cnt=snippet_cnt)
+
+    async def run(self, queries):
+        return await self.serper.run(queries)
+
+class local_search():
+    def __init__(self, snippet_cnt, data_link, embedding_link=None):
+        self.snippet_cnt = snippet_cnt
+        self.data_link = data_link
+        self.embedding_link = embedding_link
+        self.openai_embed = OpenAIEmbed()
+        self.data = None
+        self.embedding = None
+        asyncio.run(self.init_async())
+        
+    
+    async def init_async(self):
+        print("init local search")
+        self.load_data_by_link()
+        if self.embedding_link is None:
+            await self.calculate_embedding()
+        else:
+            self.load_embedding_by_link()
+        print("loaded data and embedding")
+
+    def add_suffix_to_json_filename(self, filename):
+        base_name, extension = os.path.splitext(filename)
+        return base_name + '_embed' + extension
+
+    def load_data_by_link(self):
+        #load data from json link
+        self.data = []
+        #self.data = json.load(open(self.data_link, 'r'))
+        with jsonlines.open(self.data_link) as reader:
+            for obj in reader:
+                self.data.append(obj['text'])
+
+    def load_embedding_by_link(self):
+        self.embedding = []
+        #self.embedding = json.load(open(self.embedding_link, 'r'))
+        with jsonlines.open(self.embedding_link) as reader:
+            for obj in reader:
+                self.embedding.append(obj)
+    
+    def save_embeddings(self):
+        #json.dump(self.embedding, open(self.add_suffix_to_json_filename(self.data_link), 'w'))
+        with jsonlines.open(self.add_suffix_to_json_filename(self.data_link), mode='w') as writer:
+            writer.write_all(self.embedding)
+
+    async def calculate_embedding(self):
+        result = await self.openai_embed.process_batch(self.data,retry=3)
+        self.embedding = [emb["data"][0]["embedding"] for emb in result]
+        self.save_embeddings()
+
+    async def search(self, query):
+        result = await self.openai_embed.create_embedding(query)
+        query_embed = result["data"][0]["embedding"]
+        dot_product = np.dot(self.embedding, query_embed)
+        sorted_indices = np.argsort(dot_product)[::-1]
+        top_k_indices = sorted_indices[:self.snippet_cnt]
+        return [{"content":self.data[i],"source":"local"} for i in top_k_indices]
+
+    
+    async def run(self, queries):
+        flattened_queries = []
+        for sublist in queries:
+            if sublist is None:
+                sublist = ['None', 'None']
+            for item in sublist:
+                flattened_queries.append(item)
+        
+        snippets = await asyncio.gather(*[self.search(query) for query in flattened_queries])
+        snippets_split = [snippets[i] + snippets[i+1] for i in range(0, len(snippets), 2)]
+        return snippets_split
+
+
+
+
+
+
+
+```
+
+Contents of factool/med_doc_qa/__init__.py:
+```
+
+```
+
+Contents of factool/med_doc_qa/pipeline.py:
+```
+import json
+import yaml
+import os
+import math
+import pdb
+from typing import List, Dict
+
+from factool.utils.base.pipeline import pipeline
+
+class med_doc_qa_pipeline(pipeline):
+    def __init__(self, foundation_model):
+        super().__init__('med_doc_qa', foundation_model)
+        with open(os.path.join(self.prompts_path, "claim_extraction.yaml"), 'r') as file:
+            data = yaml.load(file, Loader=yaml.FullLoader)
+        self.claim_prompt = data['med_doc_qa']
+
+        with open(os.path.join(self.prompts_path, 'query_generation.yaml'), 'r') as file:
+            data = yaml.load(file, Loader=yaml.FullLoader)
+        self.query_prompt = data['med_doc_qa']
+
+        with open(os.path.join(self.prompts_path, 'agreement_verification.yaml'), 'r') as file:
+            data = yaml.load(file, Loader=yaml.FullLoader)
+        self.verification_prompt = data['med_doc_qa']
+    
+    async def _claim_extraction(self, responses):
+        messages_list = [
+            [
+                {"role": "system", "content": self.claim_prompt['system']},
+                {"role": "user", "content": self.claim_prompt['user'].format(input=response)},
+            ]
+            for response in responses
+        ]
+        return await self.chat.async_run(messages_list, List)
+    
+    async def _query_generation(self, claims):
+        if claims == None:
+            return ['None']
+        messages_list = [
+            [
+                {"role": "system", "content": self.query_prompt['system']},
+                {"role": "user", "content": self.query_prompt['user'].format(input=claim['claim'] if 'claim' in claim else '')},
+            ]
+            for claim in claims
+        ]
+        return await self.chat.async_run(messages_list, List)
+
+    async def _verification(self, claims, evidences):
+        messages_list = [
+            [
+                {"role": "system", "content": self.verification_prompt['system']},
+                {"role": "user", "content": self.verification_prompt['user'].format(claim=claim['claim'], evidence=str(evidence))},
+            ]
+            for claim, evidence in zip(claims, evidences)
+        ]
+        return await self.chat.async_run(messages_list, dict)
+
+    async def _evidence_extraction(self, claims, prompts_parsed):
+        messages_list = [
+            [
+                {"role": "system", "content": self.verification_prompt['system']},
+                {"role": "user", "content": self.verification_prompt['evidence_extraction'].format(claim=claim['claim'], evidence=str(prompt_parsed))},
+            ]
+            for claim, prompt_parsed in zip(claims, prompts_parsed)
+        ]
+        return await self.chat.async_run(messages_list, List)
+    
+    async def run_with_tool_live(self, prompts, responses):
+        claims_in_responses = await self._claim_extraction(responses)
+        evidences_in_responses = []
+        verifications_in_responses = []
+        for claims_in_response, prompt in zip(claims_in_responses,prompts):
+            # parsed_prompts = prompt.split('\n') * len(claims_in_response)
+            # evidences = await self._evidence_extraction(claims_in_response, parsed_prompts)
+            evidences = [prompt.split('\n') for _ in claims_in_response]
+            evidences_in_responses.append(evidences)
+            verifications = await self._verification(claims_in_response, evidences)
+            verifications_in_responses.append(verifications)
+
+        return claims_in_responses, evidences_in_responses, verifications_in_responses
+    
+    async def run_with_tool_live_without_claim_extraction(self, claims):
+        queries = await self._query_generation(claims)
+        evidences = await self.tool.run(queries)
+
+        final_response = await self._verification(claims, evidences)
+        for i in range(len(final_response)):
+            if final_response[i] != None:
+                final_response[i]['queries'] = queries[i]
+                final_response[i]['evidences'] = evidences[i]
+
+        return final_response
+    
+    async def run_with_tool_api_call(self, prompts, responses):
+        batch_size = 5
+        num_batches = math.ceil(len(prompts) / batch_size)
+
+        self.sample_list = [{"prompt": prompt, "response": response, "category": 'kbqa'} for prompt, response in zip(prompts, responses)]
+
+        for i in range(num_batches):
+            print(i)
+            batch_start = i * batch_size
+            batch_end = min((i + 1) * batch_size, len(responses))
+
+            claims_in_responses, evidences_in_responses, verifications_in_responses = await self.run_with_tool_live(prompts[batch_start:batch_end],responses[batch_start:batch_end])
+
+            for j, (claims_in_response, evidences_in_response, verifications_in_response) in enumerate(zip(claims_in_responses, evidences_in_responses, verifications_in_responses)):
+                index = batch_start + j
+                
+                if claims_in_response != None:
+                    for k, claim in enumerate(claims_in_response):
+                        if verifications_in_response[k] != None:
+                            if claim != None:
+                                #verifications_in_response[k].update({'claim': claim['claim']})
+                                verifications_in_response[k] = {'claim': claim['claim'],**verifications_in_response[k]}
+                            else:
+                                #verifications_in_response[k].update({'claim': 'None'})
+                                verifications_in_response[k] = {'claim': 'None',**verifications_in_response[k]}
+
+                self.sample_list[index].update({
+                    'claims': claims_in_response,
+                    'evidences': evidences_in_response,
+                    'claim_level_factuality': verifications_in_response,
+                    'response_level_factuality': all([verification['factuality'] if verification != None else True for verification in verifications_in_response])
+                })
+
+        return self.sample_list
+    
+    async def run_with_tool_dataset(self, annotated_dataset_path: str, with_tool_classified_dataset_path: str, rerun: bool = False, rerun_indices: list = []):
+        data_path = with_tool_classified_dataset_path if rerun else annotated_dataset_path
+        with open(data_path, 'r') as f:
+            data = [json.loads(line) for line in f]
+        self.sample_list = data if rerun else [claim for sample in data for claim in sample['claims']]
+        rerun_elements = self.sample_list if not rerun else [self.sample_list[i] for i in rerun_indices]
+
+        batch_size = 4
+        num_batches = math.ceil(len(rerun_elements) / batch_size) # 5
+        
+        for i in range(num_batches):
+            print(i)
+            batch_start = i * batch_size
+            batch_end = min((i + 1) * batch_size, len(rerun_elements))
+
+            responses = await self.run_with_tool_live_without_claim_extraction(rerun_elements[batch_start:batch_end])
+
+            for j, response in enumerate(responses):
+                index = batch_start + j if rerun == False else rerun_indices[batch_start + j]
+                if response is None:
+                    self.sample_list[index].update({
+                        'with_tool_classification': 'None',
+                        'with_tool_reasoning': 'None',
+                        'queries': 'None',
+                        'evidences': 'None'
+                    })
+                else:
+                    self.sample_list[index].update({
+                        'with_tool_classification': response.get('factuality', 'None'),
+                        'with_tool_reasoning': response.get('reasoning', 'None'),
+                        'queries': response.get('queries', 'None'),
+                        'evidences': response.get('evidences', 'None')
+                    })
+        
+            # save everything after each batch to prevent data loss
+            with open(with_tool_classified_dataset_path, 'w') as f:
+                for item in self.sample_list:
+                    json_str = json.dumps(item)
+                    f.write(json_str + '\n')
+
+    async def run_self_check_live(self, fewshot, batch):
+        user_prompt_key = 'user_3_shot_CoT' if fewshot else 'user_zero_shot_CoT'
+        messages_list = [
+            [
+                {"role": "system", "content": self.self_check_prompt['system']},
+                {"role": "user", "content": self.self_check_prompt[user_prompt_key].format(claim=response['claim'])},
+            ]
+            for response in batch
+        ]
+        return await self.chat.async_run(messages_list, Dict)
+
+    async def run_self_check_dataset(self, annotated_dataset_path: str, self_check_classified_dataset_path: str, fewshot: bool = False, rerun: bool = False, rerun_indices: list = []):
+        data_path = annotated_dataset_path if not rerun else self_check_classified_dataset_path
+        with open(data_path, 'r') as f:
+            data = [json.loads(line) for line in f]
+        self.sample_list = data if rerun else [claim for sample in data for claim in sample['claims']]
+        rerun_elements = self.sample_list if not rerun else [self.sample_list[i] for i in rerun_indices]
+
+        batch_size = 10
+        num_batches = math.ceil(len(rerun_elements) / batch_size)
+
+        for i in range(num_batches):
+            print(i)
+            batch_start = i * batch_size
+            batch_end = min((i + 1) * batch_size, len(rerun_elements))
+            batch = rerun_elements[batch_start:batch_end]
+
+            responses = await self.run_self_check_live(fewshot, batch)
+            for j, response in enumerate(responses):
+                index = batch_start + j if not rerun else rerun_indices[batch_start + j]
+                if response is None:
+                    self.sample_list[index].update({
+                        'self_check_classification': 'None',
+                        'self_check_reasoning': 'None'
+                    })
+                else:
+                    self.sample_list[index].update({
+                        'self_check_classification': response.get('factuality', 'None'),
+                        'self_check_reasoning': response.get('reasoning', 'None')
+                    })
+
+            # save everything after each batch to prevent data loss
+            with open(self_check_classified_dataset_path, 'w') as f:
+                for item in self.sample_list:
+                    json_str = json.dumps(item)
+                    f.write(json_str + '\n')
+
+```
+
+Contents of factool/code/__init__.py:
+```
+
+```
+
+Contents of factool/code/pipeline.py:
+```
+import logging
+import copy
+import pdb
+import math
+import os
+import json
+import yaml
+import time
+import re
+from typing import List, Dict
+
+from factool.utils.base.pipeline import pipeline
+from factool.code.helper.postprocess import PostProcessor
+from factool.code.helper.execution import evaluate_test_cases_multi_solution
+from factool.utils.utils_json import CustomJSONEncoder
+
+class code_pipeline(pipeline):
+    def __init__(self, foundation_model, multi_solution_cnt, testcases_input_cnt):
+        super().__init__('code', foundation_model)
+
+        self.multi_solution_cnt = multi_solution_cnt
+        self.testcases_input_cnt = testcases_input_cnt
+
+        with open(os.path.join(self.prompts_path, "query_generation.yaml"), 'r') as file:
+            data = yaml.load(file, Loader=yaml.FullLoader)
+        self.query_generation_prompt = data['code']
+
+    async def _testcases_input_generation(self, batch, testcases_input_cnt):
+        messages_list = []
+        if self.company == 'openai':
+            messages_list = [
+                [
+                    {"role": "system", "content": self.query_generation_prompt['system']},
+                    {"role": "user",
+                     "content":
+                         self.query_generation_prompt[
+                             'user_testcases_' + str(testcases_input_cnt)
+                             ].format(input_question=sample['prompt'],
+                                      entry_point=sample['entry_point'])
+                     },
+                ]
+                for sample in batch
+            ]
+        elif self.company == 'anthropic':
+            messages_list = [self.query_generation_prompt[
+                                 'user_testcases_' + str(testcases_input_cnt)
+                                 ].format(input_question=sample['prompt'],
+                                          entry_point=sample['entry_point'])
+                             for sample in batch]
+        return await self.chat.async_run(messages_list, Dict)
+    
+    async def _multi_solution_generation(self, batch, multi_solution_cnt):
+        bsize = 15
+        messages_list = [
+            [
+                {"role": "system", "content": self.query_generation_prompt['system']},
+                {"role": "user", "content": self.query_generation_prompt[
+                    'user_solutions'].format(input_question=sample['prompt'],
+                                             entry_point=sample['entry_point'])},
+            ]
+            for sample in batch
+        ]
+
+        final_messages_list = [copy.deepcopy(messages)
+                               for messages in messages_list
+                               for _ in range(multi_solution_cnt)
+                               ]
+
+        responses = []
+        for i in range(0, len(final_messages_list), bsize):
+            batch = final_messages_list[i:i + bsize]
+            responses += await self.chat.async_run(batch, Dict)
+        
+        # Split the list into lists of length of multi_solution_cnt
+        responses_split = [responses[i:i + multi_solution_cnt]
+                           for i in range(0, len(responses),
+                                          multi_solution_cnt)]
+
+        # Transform each element in each list
+        multi_solutions = []
+        for solutions in responses_split:
+            key_names = [f"python_solution_{i}"
+                         for i in range(1, multi_solution_cnt + 1)]
+            new_element = {key: solutions[i]['python_solution']
+            if solutions[i] != None else "None" for i, key in enumerate(key_names)}
+            multi_solutions.append(new_element)
+
+        return multi_solutions
+    
+    async def run_with_tool_live(self, batch, batch_size):
+        testcases_input = await self._testcases_input_generation(batch, self.testcases_input_cnt)
+        multi_solutions = await self._multi_solution_generation(batch, self.multi_solution_cnt)
+
+        if testcases_input == None or multi_solutions == None:
+            return None
+        
+        responses = []
+        for i in range(batch_size):
+            response = {'testcases_input': [],
+                        'multi_solutions': [], 'with_tool_classification': "None"}
+            try:
+                response['testcases_input'] = list(testcases_input[i].values())
+                # Append the solution to be verified to the LAST element
+                # of multi_solutions
+                response['multi_solutions']\
+                    = [multi_solutions[i][f'python_solution_{j}']
+                       for j in range(1, self.multi_solution_cnt + 1)] +\
+                      [batch[i]['completion']]
+            except:
+                response['testcases_input'] = ["None"] * self.testcases_input_cnt
+                response['multi_solutions'] = ["None"] * (self.multi_solution_cnt + 1)
+            
+            exec_result = evaluate_test_cases_multi_solution(
+                batch[i]['prompt'], response['testcases_input'],
+                response['multi_solutions'], timeout=0.1)
+            response['exec_result'] = exec_result
+            
+            response['with_tool_classification'] = True
+            # must pass all testcases to be classified as "True"
+            for testcase_result in exec_result:
+                # syntax or timeout error happening on the potential solution
+                if isinstance(testcase_result[-1], str) \
+                        and testcase_result[-1].startswith('FAILURE'):
+                    response['with_tool_classification'] = False
+                # majority voting. Note that the last element
+                # is the solution to be verified. Also, multi solutions that return "FAILURE" are not counted and removed.
+                else:
+                    failure_indices = [
+                        i for i, res in enumerate(testcase_result[:-1])
+                        if isinstance(res, str) and res.startswith('FAILURE')]
+                    testcase_result = [
+                        res for i, res in enumerate(testcase_result)
+                        if i not in failure_indices]
+
+                    try:
+                        if testcase_result[:-1].count(testcase_result[-1]) \
+                                < math.ceil(len(testcase_result) / 2):
+                            response['with_tool_classification'] = False
+                    # sometimes numpy array is included in testcase_result, so this error will be raised
+                    except:
+                        response['with_tool_classification'] = False
+            
+            responses.append(response)
+
+        return responses
+
+    async def run_with_tool_api_call(self, prompts, responses, entry_points):
+
+        # response preprocessing to extract the code snippet:
+        claims = []
+        for i, response in enumerate(responses):
+            if "```python" in response:
+                match = re.search(r"```python\n(.*?)\n```", response, re.DOTALL)
+                if match:
+                    claims.append(match.group(1))
+                else:
+                    claims.append("")
+            elif "```" in response:
+                match = re.search(r"```\n(.*?)\n```", response, re.DOTALL)
+                if match:
+                    claims.append(match.group(1))
+                else:
+                    claims.append("")
+            else:
+                claims.append(response)
+
+        batch_size = 5
+        num_batches = math.ceil(len(prompts) / batch_size)
+
+        self.sample_list = [
+            {"prompt": prompt, "response": response,
+             "entry_point": entry_point, "completion": claim,
+             "category": 'code'}
+            for prompt, response, entry_point, claim
+            in zip(prompts, responses, entry_points, claims)]
+
+        for i in range(num_batches):
+            print(i)
+            batch_start = i * batch_size
+            batch_end = min((i + 1) * batch_size, len(responses))
+
+            responses_returned = await self.run_with_tool_live(self.sample_list[batch_start: batch_end], batch_end - batch_start)
+
+            for j, response_returned in enumerate(responses_returned):
+                index = batch_start + j
+                self.sample_list[index].update({
+                    'claim': self.sample_list[index]['completion'],
+                    'testcases_queries': response_returned['testcases_input'],
+                    'potential_solutions_queries': response_returned['multi_solutions'],
+                    'exec_results': response_returned['exec_result'],
+                    'claim_level_factuality': response_returned['with_tool_classification'],
+                    'response_level_factuality': response_returned['with_tool_classification']
+                })
+                del self.sample_list[index]["completion"]
+
+        return self.sample_list
+        
+    async def run_with_tool_dataset(self, annotated_dataset_path: str, with_tool_classified_dataset_path: str, rerun: bool = False, rerun_indices: list = []):
+        data_path = with_tool_classified_dataset_path if rerun else annotated_dataset_path
+        with open(data_path, 'r') as f:
+            data = [json.loads(line) for line in f]
+        self.sample_list = data
+        rerun_elements = self.sample_list if not rerun else [self.sample_list[i] for i in rerun_indices]
+
+        batch_size = 5
+        num_batches = math.ceil(len(rerun_elements) / batch_size) # 5
+
+        for i in range(num_batches):
+            print(i)
+            batch_start = i * batch_size
+            batch_end = min((i + 1) * batch_size, len(rerun_elements))
+
+            responses = await self.run_with_tool_live(rerun_elements[batch_start:batch_end], batch_end - batch_start)
+
+            for j, response in enumerate(responses):
+                index = batch_start + j if not rerun else rerun_indices[batch_start + j]
+                self.sample_list[index]['with_tool_classification'] = response['with_tool_classification'] if response is not None else 'None'
+                if response is not None:
+                    self.sample_list[index].update({
+                        'testcases_input': response['testcases_input'],
+                        'multi_solutions': response['multi_solutions'],
+                        'exec_result': response['exec_result']
+                    })
+        
+            # save everything after each batch to prevent data loss
+            with open(with_tool_classified_dataset_path, 'w') as f:
+                for item in self.sample_list:
+                    try:
+                        json_str = json.dumps(item, cls=CustomJSONEncoder)
+                    except:
+                        continue
+                    f.write(json_str + '\n')
+    
+    async def run_self_check_live(self, fewshot, batch):
+        user_prompt_key = 'user_3_shot_CoT' if fewshot else 'user_zero_shot_CoT'
+        messages_list = [
+            [
+                {"role": "system", "content": self.self_check_prompt['system']},
+                {"role": "user", "content": self.self_check_prompt[user_prompt_key].format(input_question=response['prompt'], input_solution=response['completion'])},
+            ]
+            for response in batch
+        ]
+        return await self.chat.async_run(messages_list, Dict)
+
+    async def run_self_check_dataset(self, annotated_dataset_path: str, self_check_classified_dataset_path: str, fewshot: bool = False, rerun: bool = False, rerun_indices: list = []):
+        if rerun == False:
+            with open(annotated_dataset_path, 'r') as f:
+                self.sample_list = [json.loads(line) for line in f]
+            rerun_elements = self.sample_list
+        else:
+            with open(self_check_classified_dataset_path, 'r') as f:
+                self.sample_list = [json.loads(line) for line in f]
+            rerun_elements = [self.sample_list[i] for i in rerun_indices]
+
+        batch_size = 5
+        num_batches = math.ceil(len(rerun_elements) / batch_size)
+
+        for i in range(num_batches):
+            print(i)
+            batch_start = i * batch_size
+            batch_end = (i + 1) * batch_size
+            batch = rerun_elements[batch_start:batch_end]
+
+            responses = await self.run_self_check_live(fewshot, batch)
+            for j, response in enumerate(responses):
+                index = batch_start + j if rerun == False else rerun_indices[batch_start + j]
+                self.sample_list[index]['self_check_classification'] = response.get('factuality', 'None') if response is not None else 'None'
+                self.sample_list[index]['self_check_reasoning'] = response.get('reasoning', 'None') if response is not None else 'None'
+        
+            # save everything after each batch to prevent data loss
+            with open(self_check_classified_dataset_path, 'w') as f:
+                for item in self.sample_list:
+                    json_str = json.dumps(item)
+                    f.write(json_str + '\n')
+```
+
+Contents of factool/code/tool.py:
+```
+
+```
+
+Contents of factool/code/helper/execution.py:
+```
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT license.
+
+import ctypes
+# libgcc_s = ctypes.CDLL('libgcc_s.so.1')
+
+from collections import defaultdict
+from concurrent.futures import as_completed, ProcessPoolExecutor
+import logging
+
+from factool.code.helper._execution import test_case_against_solution
+
+logging.basicConfig(
+    format="SystemLog: [%(asctime)s][%(name)s][%(levelname)s] - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+    level=logging.INFO,
+)
+
+logger = logging.getLogger(__name__)
+
+def evaluate_test_cases_multi_solution(prompt, testcases_input,
+                                       multi_solutions, timeout=0.1):
+    logger.info(f'Start evaluation with test code, timeout={timeout}')
+
+    with ProcessPoolExecutor() as executor:
+        futures = []
+        results = [[None for _ in multi_solutions] for _ in testcases_input]
+
+        for i, testcase in enumerate(testcases_input):
+            for j, solution in enumerate(multi_solutions):
+                args = (prompt, solution, testcase, timeout)
+                future = executor.submit(test_case_against_solution, *args)
+                futures.append((i, j, future))
+        logger.info(f'{len(futures)} execution requests are submitted')
+        
+        for completed_future in as_completed([f[2] for f in futures]):
+            for i, j, future in futures:
+                if future == completed_future:
+                    logger.info('[{}/{}] execution completed'.format(
+                        i * len(multi_solutions) + j + 1, len(futures)))
+                    result = completed_future.result()
+                    results[i][j] = result
+                    break
+
+    return results
+
+
+
+
+
+
+
+```
+
+Contents of factool/code/helper/postprocess.py:
+```
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT license.
+
+from collections import defaultdict
+
+from factool.code.helper.io_utils import Tools
+
+STOP_TOKEN = ['\nclass', '\ndef', '\n#', '\nif', '\nprint']
+
+class PostProcessor:
+    @staticmethod
+    def map_task_id_for_solution(predict_path, source_path):
+        database = dict()
+        raw_problems = Tools.load_tasks(source_path)
+        for task_id in raw_problems.keys():
+            database[raw_problems[task_id]['prompt']] = raw_problems[task_id]
+
+        result = []
+        predictions = Tools.load_jsonl(predict_path)
+        
+        for pre in predictions:
+            task = database[pre['prompt']]
+            
+            for sample in pre['samples']:
+                processed_code = PostProcessor.solution_extract(sample)
+                result.append({
+                    'task_id': task['task_id'],
+                    'prompt': pre['prompt'],
+                    'test': task['test'],
+                    'entry_point': task['entry_point'],
+                    'completion': processed_code
+                })
+        return result, len(raw_problems)
+
+    @staticmethod
+    def solution_extract(content):
+        for identifier in STOP_TOKEN:
+            if identifier in content:
+                content = content.split(identifier)[0]
+        return content
+```
+
+Contents of factool/code/helper/__init__.py:
+```
+
+```
+
+Contents of factool/code/helper/_execution.py:
+```
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT license.
+
+from typing import Optional, Dict
+import contextlib
+import faulthandler
+import io
+import os
+import multiprocessing
+import platform
+import signal
+import tempfile
+
+def test_case_against_solution(prompt: str, completion: str, test: str, timeout: float):
+    """
+    Get the output of a testcases against a solution
+    """
+
+    def unsafe_execute():
+
+        with create_tempdir():
+
+            # These system calls are needed when cleaning up tempdir.
+            import os
+            import shutil
+            rmtree = shutil.rmtree
+            rmdir = os.rmdir
+            chdir = os.chdir
+
+            # Disable functionalities that can make destructive changes to the test.
+            reliability_guard()
+
+            # Construct the check program and run it. VERY IMPORTANT!!!
+            import_packages_end_index = prompt.find("def")
+
+            # some HumanEval prompts contain helper function that has
+            # to be included. Patching.
+            helper_func = ""
+            helper_funcs_to_be_included = \
+                ["\n\ndef is_palindrome(string: str) -> bool:\n"
+                 "    \"\"\" Test if given string is a palindrome \"\"\"\n"
+                 "    return string == string[::-1]\n\n\n",
+                 "import math\n\n\ndef poly(xs: list, x: float):\n"
+                 "    \"\"\"\n    Evaluates polynomial with"
+                 " coefficients xs at point x.\n"
+                 "    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n\n"
+                 "    \"\"\"\n    return sum([coeff * math.pow(x, i) for i,"
+                 " coeff in enumerate(xs)])\n\n\n", "\n\ndef encode_cyclic(s: str):\n"
+                                                    "    \"\"\"\n    returns encoded"
+                                                    " string by cycling groups of three"
+                                                    " characters.\n    \"\"\"\n"
+                                                    "    # split string to groups."
+                                                    " Each of length 3.\n"
+                                                    "    groups"
+                                                    " = [s[(3 * i):min((3 * i + 3),"
+                                                    " len(s))] for"
+                                                    " i in range((len(s) + 2) // 3)]\n"
+                                                    "    # cycle elements in each"
+                                                    " group. Unless group has fewer"
+                                                    " elements than 3.\n    "
+                                                    "groups = [(group[1:] + group[0])"
+                                                    " if len(group) == 3 "
+                                                    "else group for group in groups]\n"
+                                                    "    "
+                                                    "return \"\".join(groups)\n\n\n",
+                 "\n\ndef encode_shift(s: str):\n    \"\"\"\n"
+                 "    returns encoded string by shifting every"
+                 " character by 5 in the alphabet.\n    \"\"\"\n"
+                 "    return \"\".join([chr(((ord(ch)"
+                 " + 5 - ord(\"a\")) % 26) + ord(\"a\")) for ch in s])\n\n\n"]
+            for helper in helper_funcs_to_be_included:
+                if helper in prompt:
+                    helper_func = helper
+
+            check_program = (
+                (prompt[:import_packages_end_index] if import_packages_end_index != -1 else "") + helper_func + completion + "\n" + f'result = {test}'
+            )
+
+            try:
+                exec_globals = {}
+                with swallow_io():
+                    with time_limit(timeout):
+                        exec(check_program, exec_globals)
+                        result.append(exec_globals['result'])
+            except TimeoutException:
+                result.append("FAILURE: timed out")
+            except BaseException as e:
+                error_type = type(e).__name__
+                result.append(f"FAILURE: {error_type}: {e}")
+
+            # Needed for cleaning up.
+            shutil.rmtree = rmtree
+            os.rmdir = rmdir
+            os.chdir = chdir
+
+    manager = multiprocessing.Manager()
+    result = manager.list()
+
+    p = multiprocessing.Process(target=unsafe_execute)
+    p.start()
+    p.join(timeout=timeout+1)
+    if p.is_alive():
+        p.kill()
+
+    if not result:
+        result.append("timed out")
+
+    return result[0]
+
+@contextlib.contextmanager
+def time_limit(seconds: float):
+    def signal_handler(signum, frame):
+        raise TimeoutException("Timed out!")
+    signal.setitimer(signal.ITIMER_REAL, seconds)
+    signal.signal(signal.SIGALRM, signal_handler)
+    try:
+        yield
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+
+
+@contextlib.contextmanager
+def swallow_io():
+    stream = WriteOnlyStringIO()
+    with contextlib.redirect_stdout(stream):
+        with contextlib.redirect_stderr(stream):
+            with redirect_stdin(stream):
+                yield
+
+
+@contextlib.contextmanager
+def create_tempdir():
+    with tempfile.TemporaryDirectory() as dirname:
+        with chdir(dirname):
+            yield dirname
+
+
+class TimeoutException(Exception):
+    pass
+
+
+class WriteOnlyStringIO(io.StringIO):
+    """ StringIO that throws an exception when it's read from """
+
+    def read(self, *args, **kwargs):
+        raise IOError
+
+    def readline(self, *args, **kwargs):
+        raise IOError
+
+    def readlines(self, *args, **kwargs):
+        raise IOError
+
+    def readable(self, *args, **kwargs):
+        """ Returns True if the IO object can be read. """
+        return False
+
+
+class redirect_stdin(contextlib._RedirectStream):  # type: ignore
+    _stream = 'stdin'
+
+
+@contextlib.contextmanager
+def chdir(root):
+    if root == ".":
+        yield
+        return
+    cwd = os.getcwd()
+    os.chdir(root)
+    try:
+        yield
+    except BaseException as exc:
+        raise exc
+    finally:
+        os.chdir(cwd)
+
+
+def reliability_guard(maximum_memory_bytes: Optional[int] = None):
+    """
+    This disables various destructive functions and prevents the generated code
+    from interfering with the test (e.g. fork bomb, killing other processes,
+    removing filesystem files, etc.)
+
+    WARNING
+    This function is NOT a security sandbox. Untrusted code, including, model-
+    generated code, should not be blindly executed outside of one. See the 
+    Codex paper for more information about OpenAI's code sandbox, and proceed
+    with caution.
+    """
+
+    if maximum_memory_bytes is not None:
+        import resource
+        resource.setrlimit(resource.RLIMIT_AS,
+                           (maximum_memory_bytes, maximum_memory_bytes))
+        resource.setrlimit(resource.RLIMIT_DATA,
+                           (maximum_memory_bytes, maximum_memory_bytes))
+        if not platform.uname().system == 'Darwin':
+            resource.setrlimit(resource.RLIMIT_STACK,
+                               (maximum_memory_bytes, maximum_memory_bytes))
+
+    faulthandler.disable()
+
+    import builtins
+    builtins.exit = None
+    builtins.quit = None
+
+    import os
+    os.environ['OMP_NUM_THREADS'] = '1'
+
+    os.kill = None
+    os.system = None
+    os.putenv = None
+    os.remove = None
+    os.removedirs = None
+    os.rmdir = None
+    os.fchdir = None
+    os.setuid = None
+    os.fork = None
+    os.forkpty = None
+    os.killpg = None
+    os.rename = None
+    os.renames = None
+    os.truncate = None
+    os.replace = None
+    os.unlink = None
+    os.fchmod = None
+    os.fchown = None
+    os.chmod = None
+    os.chown = None
+    os.chroot = None
+    os.fchdir = None
+    os.lchflags = None
+    os.lchmod = None
+    os.lchown = None
+    os.getcwd = None
+    os.chdir = None
+
+    import shutil
+    shutil.rmtree = None
+    shutil.move = None
+    shutil.chown = None
+
+    import subprocess
+    subprocess.Popen = None  # type: ignore
+
+    __builtins__['help'] = None
+
+    import sys
+    sys.modules['ipdb'] = None
+    sys.modules['joblib'] = None
+    sys.modules['resource'] = None
+    sys.modules['psutil'] = None
+    sys.modules['tkinter'] = None
+
+```
+
+Contents of factool/code/helper/io_utils.py:
+```
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT license.
+
+import json
+
+class Tools:
+    @staticmethod
+    def load_jsonl(file_path):
+        json_objects = []
+        with open(file_path, 'r', encoding='utf8') as f:
+            for line in f:
+                json_objects.append(json.loads(line.strip()))
+        return json_objects
+    
+    @staticmethod
+    def load_tasks(task_path):
+        result = dict()
+        lines = Tools.load_jsonl(task_path)
+        for line in lines:
+            result[line['task_id']] = line
+        return result
+        
+    @staticmethod
+    def write_file(path, content):
+        with open(path, 'w', encoding='utf8') as f:
+            f.write(content)
+```
+
+Contents of factool/utils/__init_.py:
+```
+
+```
+
+Contents of factool/utils/openai_wrapper.py:
+```
+# the async version is adapted from https://gist.github.com/neubig/80de662fb3e225c18172ec218be4917a
+
+from __future__ import annotations
+
+import os
+import openai
+from openai import AsyncOpenAI
+
+import ast
+import asyncio
+from typing import Any, List
+import os
+import openai
+from openai import AsyncOpenAI
+
+aclient = AsyncOpenAI(api_key=os.environ.get("OPENAI_API_KEY", None))
+
+# from factool.env_config import factool_env_config
+
+# env
+# openai.api_key = factool_env_config.openai_api_key
+
+class OpenAIChat():
+    def __init__(
+            self,
+            model_name='gpt-3.5-turbo',
+            max_tokens=2500,
+            temperature=0,
+            top_p=1,
+            request_timeout=120,
+    ):
+
+        self.config = {
+            'model_name': model_name,
+            'max_tokens': max_tokens,
+            'temperature': temperature,
+            'top_p': top_p,
+            'request_timeout': request_timeout,
+        }
+
+    def extract_list_from_string(self, input_string):
+        # pattern = r'\[.*\]'  
+        # result = re.search(pattern, input_string)
+        # if result:
+        #     return result.group()
+        # else:
+        #     return None
+        start_index = input_string.find('[')  
+        end_index = input_string.rfind(']') 
+
+        if start_index != -1 and end_index != -1 and start_index < end_index:
+            return input_string[start_index:end_index + 1]
+        else:
+            return None
+
+    def extract_dict_from_string(self, input_string):
+        start_index = input_string.find('{')
+        end_index = input_string.rfind('}')
+
+        if start_index != -1 and end_index != -1 and start_index < end_index:
+            return input_string[start_index:end_index + 1]
+        else:
+            return None
+
+    def _boolean_fix(self, output):
+        return output.replace("true", "True").replace("false", "False")
+
+    def _type_check(self, output, expected_type):
+        try:
+            output_eval = ast.literal_eval(output)
+            if not isinstance(output_eval, expected_type):
+                return None
+            return output_eval
+        except:
+            '''
+            if(expected_type == List):
+                valid_output = self.extract_list_from_string(output)
+                output_eval = ast.literal_eval(valid_output)
+                if not isinstance(output_eval, expected_type):
+                    return None
+                return output_eval
+            elif(expected_type == dict):
+                valid_output = self.extract_dict_from_string(output)
+                output_eval = ast.literal_eval(valid_output)
+                if not isinstance(output_eval, expected_type):
+                    return None
+                return output_eval
+            '''
+            return None
+
+    async def dispatch_openai_requests(
+        self,
+        messages_list,
+    ) -> list[str]:
+        """Dispatches requests to OpenAI API asynchronously.
+        
+        Args:
+            messages_list: List of messages to be sent to OpenAI ChatCompletion API.
+        Returns:
+            List of responses from OpenAI API.
+        """
+        async def _request_with_retry(messages, retry=3):
+            for _ in range(retry):
+                try:
+                    response = await aclient.chat.completions.create(model=self.config['model_name'],
+                    messages=messages,
+                    max_tokens=self.config['max_tokens'],
+                    temperature=self.config['temperature'],
+                    top_p=self.config['top_p'],
+                    request_timeout=self.config['request_timeout'])
+                    return response
+                except openai.RateLimitError:
+                    print('Rate limit error, waiting for 40 second...')
+                    await asyncio.sleep(40)
+                except openai.APIError:
+                    print('API error, waiting for 1 second...')
+                    await asyncio.sleep(1)
+                except openai.APIConnectionError:
+                    print('API Connection error, waiting for 3 second...')
+                    await asyncio.sleep(3)
+
+            return None
+
+        async_responses = [
+            _request_with_retry(messages)
+            for messages in messages_list
+        ]
+
+        return await asyncio.gather(*async_responses)
+
+    async def async_run(self, messages_list, expected_type):
+        retry = 1
+        responses = [None for _ in range(len(messages_list))]
+        messages_list_cur_index = [i for i in range(len(messages_list))]
+
+        while retry > 0 and len(messages_list_cur_index) > 0:
+            print(f'{retry} retry left...')
+            messages_list_cur = [messages_list[i] for i in messages_list_cur_index]
+
+            predictions = await self.dispatch_openai_requests(
+                messages_list=messages_list_cur,
+            )
+
+            preds = [self._type_check(self._boolean_fix(prediction['choices'][0]['message']['content']), expected_type) if prediction is not None else None for prediction in predictions]
+
+            finised_index = []
+            for i, pred in enumerate(preds):
+                if pred is not None:
+                    responses[messages_list_cur_index[i]] = pred
+                    finised_index.append(messages_list_cur_index[i])
+
+            messages_list_cur_index = [i for i in messages_list_cur_index if i not in finised_index]
+
+            retry -= 1
+
+        return responses
+
+class OpenAIEmbed():
+    def __init__():
+        assert openai.api_key is not None, "Please set the OPENAI_API_KEY environment variable."
+        assert openai.api_key != '', "Please set the OPENAI_API_KEY environment variable."
+
+    async def create_embedding(self, text, retry=3):
+        for _ in range(retry):
+            try:
+                response = await aclient.embeddings.create(input=text, model="text-embedding-ada-002")
+                return response
+            except openai.RateLimitError:
+                print('Rate limit error, waiting for 1 second...')
+                await asyncio.sleep(1)
+            except openai.APIError:
+                print('API error, waiting for 1 second...')
+                await asyncio.sleep(1)
+            except openai.Timeout:
+                print('Timeout error, waiting for 1 second...')
+                await asyncio.sleep(1)
+        return None
+
+    async def process_batch(self, batch, retry=3):
+        tasks = [self.create_embedding(text, retry=retry) for text in batch]
+        return await asyncio.gather(*tasks)
+
+if __name__ == "__main__":
+    chat = OpenAIChat(model_name='llama-2-7b-chat-hf')
+
+    predictions = asyncio.run(chat.async_run(
+        messages_list=[
+            [{"role": "user", "content": "show either 'ab' or '['a']'. Do not do anything else."}],
+        ] * 20,
+        expected_type=List,
+    ))
+
+    print(predictions)
+    # Usage
+    # embed = OpenAIEmbed()
+    # batch = ["string1", "string2", "string3", "string4", "string5", "string6", "string7", "string8", "string9", "string10"]  # Your batch of strings
+    # embeddings = asyncio.run(embed.process_batch(batch, retry=3))
+    # for embedding in embeddings:
+    #     print(embedding["data"][0]["embedding"])
+```
+
+Contents of factool/utils/utils_json.py:
+```
+import json
+import numpy as np
+
+class CustomJSONEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, np.int64):
+            return int(obj)
+        elif isinstance(obj, tuple):
+            return list(obj)
+        elif isinstance(obj, np.ndarray):
+            return obj.tolist()
+        return super(CustomJSONEncoder, self).default(obj)
+```
+
+Contents of factool/utils/claim_extractor.py:
+```
+import os
+import pathlib
+from openai import OpenAI
+
+client = OpenAI()
+import yaml
+import json
+import asyncio
+from tqdm import tqdm
+from factool.env_config import factool_env_config
+
+
+# env
+# openai.api_key = factool_env_config.openai_api_key
+
+
+config = {
+    'model_name': 'gpt-3.5-turbo',
+    'max_tokens': 2000,
+    'temperature': 0.0,
+    'top_p': 1,
+    'frequency_penalty': 0.0,
+    'presence_penalty': 0.0,
+    'n': 1
+}
+
+
+# Make api calls asynchronously
+async def run_api(messages):
+    async def single_run(message):
+        output = client.chat.completions.create(model=config['model_name'],
+        messages=message,
+        max_tokens=config['max_tokens'],
+        temperature=config['temperature'],
+        top_p=config['top_p'],
+        frequency_penalty=config['frequency_penalty'],
+        presence_penalty=config['presence_penalty'],
+        n=config['n'])
+        return output.choices[0].message.content.strip()
+
+    responses = [single_run(messages[index]) for index in range(len(messages))]
+    return await asyncio.gather(*responses)
+
+
+
+# Import data from scientific.json
+scientific_list = []
+with open("../datasets/scientific/scientific.json", "r") as f:
+    data = json.load(f)
+    for dict_data in data:
+        cur_dict = {'dataset_name': 'scientific',
+                    'question': dict_data["question"],
+                    'factual_response': dict_data['factual_response']}
+        scientific_list.append(cur_dict)
+
+# Apply template prompt
+with open("./prompts/claim_extraction.yaml") as f:
+    data = yaml.load(f, Loader=yaml.FullLoader)
+prompt = data['scientific']
+messages_list = [
+    [
+        {"role": "system", "content": prompt['system']},
+        {"role": "user", "content": prompt['user'].format(input=sample['factual_response'])},
+    ]
+    for sample in scientific_list
+]
+
+assert len(messages_list) == len(scientific_list), "The data length is different"
+
+# Run the API to get the output
+print("begin claims extraction...")
+results = asyncio.run(run_api(messages_list))
+for i in range(len(scientific_list)):
+    scientific_list[i]["claims"] = results[i]
+
+with open('../datasets/scientific/scientific_claims.json', 'w') as f:
+    json.dump(scientific_list, f, indent=4)
+
+
+"""
+The scientific_claims.json file saved by the above code may have format problems, here are some adjustments
+"""
+with open("../datasets/scientific/scientific_claims.json", "r") as f:
+    data = json.load(f)
+    for data_i in tqdm(data, total=len(data)):
+        try:
+            data_i["claims"] = json.loads(data_i["claims"].strip())
+        except:
+            print(data_i["claims"])
+            continue
+with open("../datasets/scientific/scientific_claims.json", "w") as f:
+    json.dump(data, f, indent=4)
+
+```
+
+Contents of factool/utils/base/__init__.py:
+```
+
+```
+
+Contents of factool/utils/base/pipeline.py:
+```
+import yaml
+from factool.utils.openai_wrapper import OpenAIChat
+import os
+import pathlib
+
+class pipeline():
+    def __init__(self, domain, foundation_model):
+        #if foundation_model == 'gpt-3.5-turbo' or foundation_model == 'gpt-4':
+        self.company = 'openai'
+        self.chat = OpenAIChat(model_name=foundation_model)
+
+        self.prompts_path = os.path.join(os.path.dirname(pathlib.Path(__file__)), "../prompts/")
+        
+        with open(os.path.join(self.prompts_path, "self_check.yaml"), 'r') as file:
+            data = yaml.load(file, Loader=yaml.FullLoader)
+        self.self_check_prompt = data[domain]
+```
+
+Contents of factool/math/__init__.py:
+```
+
+```
+
+Contents of factool/math/pipeline.py:
+```
+import json
+import math
+import os
+from typing import List, Dict
+import yaml
+import pdb
+
+from factool.math.tool import python_executor
+from factool.utils.base.pipeline import pipeline
+
+class math_pipeline(pipeline):
+    def __init__(self, foundation_model):
+        super().__init__('math', foundation_model)
+
+        self.tool = python_executor()
+
+        with open(os.path.join(self.prompts_path, "claim_extraction.yaml"), 'r') as file:
+            data = yaml.load(file, Loader=yaml.FullLoader)
+        self.claim_prompt = data['math']
+
+        with open(os.path.join(self.prompts_path, 'query_generation.yaml'), 'r') as file:
+            data = yaml.load(file, Loader=yaml.FullLoader)
+        self.query_prompt = data['math']
+
+    def _verification(self, exec_results):
+        classification_results = [True for _ in range(len(exec_results))]
+        for i in range(len(exec_results)):
+            if exec_results[i] is not None and 'False' in exec_results[i]:
+                classification_results[i] = False
+        
+        return classification_results
+
+    async def _claim_extraction(self, samples):
+        messages_list = [
+            [
+                {"role": "system", "content": self.claim_prompt['system']},
+                {"role": "user", "content": self.claim_prompt['user'].format(input_question=sample['prompt'], input_solution=sample['response'])},
+            ]
+            for sample in samples
+        ]
+        return await self.chat.async_run(messages_list, List)
+    
+    async def _query_generation(self, claims):
+        messages_list = [
+            [
+                {"role": "system", "content": self.query_prompt['system']},
+                {"role": "user", "content": self.query_prompt['user'].format(math_calculation=claim['math_calculation'], calculated_answer=claim['calculated_answer'])},
+            ]
+            for claim in claims
+        ]
+        return await self.chat.async_run(messages_list, Dict)
+    
+    async def run_with_tool_live(self, samples):
+        claims_in_responses = await self._claim_extraction(samples)
+        queries_in_responses = []
+        exec_results_in_responses = []
+        verifications_in_responses = []
+        for claims_in_response in claims_in_responses:
+            queries = await self._query_generation(claims_in_response)
+            queries_in_responses.append(queries)
+            exec_results = []
+            for query in queries:
+                try:
+                    exec_results.append(self.tool.run(query['python_snippet']))
+                except:
+                    exec_results.append('None')
+            exec_results_in_responses.append(exec_results)
+            verifications = self._verification(exec_results)
+            verifications_in_responses.append(verifications)
+
+        return claims_in_responses, queries_in_responses, exec_results_in_responses, verifications_in_responses
+    
+    async def run_with_tool_live_without_claim_extraction(self, claims):
+        queries = await self._query_generation(claims)
+
+        exec_results = []
+        for query in queries:
+            try:
+                exec_results.append(self.tool.run(query['python_snippet']))
+            except:
+                exec_results.append(None)
+        classification_results = self._verification(exec_results)
+        return queries, exec_results, classification_results
+    
+    async def run_with_tool_api_call(self, prompts, responses):
+        batch_size = 5
+        num_batches = math.ceil(len(prompts) / batch_size)
+
+        self.sample_list = [{"prompt": prompt, "response": response, "category": 'math'} for prompt, response in zip(prompts, responses)]
+
+        for i in range(num_batches):
+            print(i)
+            batch_start = i * batch_size
+            batch_end = min((i + 1) * batch_size, len(responses))
+
+            claims_in_responses, queries_in_responses, exec_results_in_response, verifications_in_responses = await self.run_with_tool_live(self.sample_list[batch_start: batch_end])
+
+            for j, (claims_in_response, queries_in_response, exec_results_in_response, verifications_in_response) in enumerate(zip(claims_in_responses, queries_in_responses, exec_results_in_response, verifications_in_responses)):
+                index = batch_start + j
+
+                self.sample_list[index].update({
+                    'claims': claims_in_response,
+                    'queries': queries_in_response,
+                    'execution_results': exec_results_in_response,
+                    'claim_level_factuality': verifications_in_response,
+                    'response_level_factuality': all([verification if verification != None else True for verification in verifications_in_response])
+                })
+
+        return self.sample_list
+
+    async def run_with_tool_dataset(self, annotated_dataset_path: str, with_tool_classified_dataset_path: str, rerun: bool = False, rerun_indices: list = []):
+        data_path = annotated_dataset_path if not rerun else with_tool_classified_dataset_path
+        with open(data_path, 'r') as f:
+            data = [json.loads(line) for line in f]
+        self.sample_list = data if rerun else [claim for sample in data for claim in sample['claims']]
+        rerun_elements = self.sample_list if not rerun else [self.sample_list[i] for i in rerun_indices]
+
+        batch_size = 10
+        num_batches = math.ceil(len(rerun_elements) / batch_size) # 5
+
+        for i in range(num_batches):
+            print("test1")
+            print(i)
+            batch_start = i * batch_size
+            batch_end = min((i + 1) * batch_size, len(rerun_elements))
+            batch = rerun_elements[batch_start:batch_end]
+
+            queries, exec_results, classification_results = await self.run_with_tool_live_without_claim_extraction(batch)
+
+            for j, (query, exec_result, classification_result) in enumerate(zip(queries, exec_results, classification_results)):
+                index = batch_start + j if not rerun else rerun_indices[batch_start + j]
+                self.sample_list[index].update({
+                    'query': query,
+                    'exec_result': exec_result,
+                    'with_tool_classification': classification_result,
+                })
+        
+            # save everything after each batch to prevent data loss
+            with open(with_tool_classified_dataset_path, 'w') as f:
+                for item in self.sample_list:
+                    try:
+                        json_str = json.dumps(item)
+                    except:
+                        continue
+                    f.write(json_str + '\n')
+
+    async def run_self_check_live(self, fewshot, batch):
+        user_prompt_key = 'user_3_shot_CoT' if fewshot else 'user_zero_shot_CoT'
+        messages_list = [
+            [
+                {"role": "system", "content": self.self_check_prompt['system']},
+                {"role": "user", "content": self.self_check_prompt[user_prompt_key].format(input_calculation=response['math_calculation'], input_calculated_answer=response['calculated_answer'])},
+            ]
+            for response in batch
+        ]
+        return await self.chat.async_run(messages_list, Dict)
+
+    async def run_self_check_dataset(self, annotated_dataset_path: str, self_check_classified_dataset_path: str, fewshot: bool = False, rerun: bool = False, rerun_indices: list = []):
+        data_path = annotated_dataset_path if not rerun else self_check_classified_dataset_path
+        with open(data_path, 'r') as f:
+            data = [json.loads(line) for line in f]
+        self.sample_list = data if rerun else [claim for sample in data for claim in sample['claims']]
+        rerun_elements = self.sample_list if not rerun else [self.sample_list[i] for i in rerun_indices]
+
+        batch_size = 10
+        num_batches = math.ceil(len(rerun_elements) / batch_size)
+
+        for i in range(num_batches):
+            print(i)
+            batch_start = i * batch_size
+            batch_end = min((i + 1) * batch_size, len(rerun_elements))
+            batch = rerun_elements[batch_start:batch_end]
+
+            responses = await self.run_self_check_live(fewshot, batch)
+            for j, response in enumerate(responses):
+                index = batch_start + j if not rerun else rerun_indices[batch_start + j]
+                if response is None:
+                    self.sample_list[index].update({
+                        'self_check_classification': 'None',
+                        'self_check_reasoning': 'None'
+                    })
+                else:
+                    self.sample_list[index].update({
+                        'self_check_classification': response.get('factuality', 'None'),
+                        'self_check_reasoning': response.get('reasoning', 'None')
+                    })
+
+            # save everything after each batch to prevent data loss
+            with open(self_check_classified_dataset_path, 'w') as f:
+                for item in self.sample_list:
+                    json_str = json.dumps(item)
+                    f.write(json_str + '\n')
+```
+
+Contents of factool/math/tool.py:
+```
+import sys
+import io
+import yaml
+import pdb
+
+class python_executor:
+    def __init__(self):
+        pass
+
+    def run_single(self, program):
+        buffer = io.StringIO() # Create an in-memory buffer for the output
+        stdout = sys.stdout # Save the original standard output
+        sys.stdout = buffer # Redirect the standard output to the buffer
+        try:
+            exec(program)
+        except Exception as e:
+            # Handle the error here
+            error_message = str(e)
+            sys.stdout = stdout  # Restore the original standard output
+            return error_message
+
+        exec(program)
+        sys.stdout = stdout # Restore the original standard output
+        output = buffer.getvalue() # Get the output from the buffer
+        return output
+
+    def run(self, snippet):
+        if snippet == None:
+            return None
+        exec_result = self.run_single(snippet)
+        if exec_result and 'False' in exec_result:
+            exec_result = 'False'
+        else:
+            exec_result = 'True'
+        return exec_result
+```
+
+Contents of factool/scientific/__init__.py:
+```
+
+```
+
+Contents of factool/scientific/pipeline.py:
+```
+import time
+import json
+import math
+import os
+import yaml
+from typing import Dict, List
+
+from factool.scientific.tool import google_scholar
+from factool.utils.base.pipeline import pipeline
+
+class scientific_pipeline(pipeline):
+    def __init__(self, foundation_model):
+        super().__init__('scientific', foundation_model)
+
+        self.tool = google_scholar()
+
+        with open(os.path.join(self.prompts_path, "claim_extraction.yaml"), 'r') as file:
+            data = yaml.load(file, Loader=yaml.FullLoader)
+        self.claim_prompt = data['scientific']
+
+        with open(os.path.join(self.prompts_path, 'agreement_verification.yaml'), 'r') as file:
+            data = yaml.load(file, Loader=yaml.FullLoader)
+        self.verification_prompt = data['scientific']
+
+    async def _claim_extraction(self, responses):
+        messages_list = [
+            [
+                {"role": "system", "content": self.claim_prompt['system']},
+                {"role": "user", "content": self.claim_prompt['user'].format(input=response)},
+            ]
+            for response in responses
+        ]
+        return await self.chat.async_run(messages_list, List)
+    
+    async def _check_authors(self, authors):
+        messages_list = [
+            [
+                {"role": "system", "content": self.verification_prompt['system']},
+                {"role": "user", "content": self.verification_prompt['user'].format(string1=claim_author, list2=real_author)},
+            ]
+            for claim_author, real_author in authors
+        ]
+
+        return await self.chat.async_run(messages_list, Dict)
+
+    async def _verification(self, claims, responses):
+        authors = [(claim['paper_author(s)'], response['author']) for claim, response in zip(claims, responses)]
+        check_authors_results = await self._check_authors(authors)
+        final_responses = []
+        for i, (claim, response) in enumerate(zip(claims, responses)):
+            final_response = {
+                'generated_paper_title': claim['paper_title'],
+                'generated_paper_author(s)': claim['paper_author(s)'],
+                'generated_paper_pub_year': claim['paper_pub_year'],
+                'actual_paper_title': response['title'],
+                'actual_paper_author(s)': response['author'],
+                'actual_paper_pub_year': response['pub_year'],
+            }
+
+            errors = []
+            if final_response['generated_paper_title'].lower() != final_response['actual_paper_title'].lower() and final_response['generated_paper_title'].lower() not in final_response['actual_paper_title'].lower() and final_response['actual_paper_title'].lower() not in final_response['generated_paper_title'].lower() :
+                errors.append('wrong_paper_title')
+            if check_authors_results[i]['factuality'] == False:
+                errors.append('wrong_paper_author(s)')
+            if final_response['generated_paper_pub_year'] != final_response['actual_paper_pub_year']:
+                errors.append('wrong_paper_pub_year')
+
+            final_response['error'] = errors
+            final_response['factuality'] = len(errors) == 0
+
+            final_responses.append(final_response)
+
+        return final_responses
+
+    async def run_with_tool_live(self, samples):
+        claims_in_responses = await self._claim_extraction(samples)
+        queries_in_responses = []
+        evidences_in_responses = []
+        verifications_in_responses = []
+        for claims_in_response in claims_in_responses:
+            queries = [claim['paper_title'] for claim in claims_in_response]
+            queries_in_responses.append(queries)
+            evidences = [self.tool.run(paper_title) for paper_title in queries]
+            evidences_in_responses.append(evidences)
+            verifications = await self._verification(claims_in_response, evidences)
+            verifications_in_responses.append(verifications)
+
+        return claims_in_responses, queries_in_responses, evidences_in_responses, verifications_in_responses
+        
+    async def run_with_tool_live_without_claim_extraction(self, claims):
+        # claims = [{"paper_title": "A Survey of Modern Authorship Attribution Methods", "paper_author(s)": "Stamatatos, Efstathios", "paper_pub_year": "2013"}, {"paper_title": "BERT", "paper_author(s)": "John Smith", "paper_pub_year": "2020"}]
+        papers_titles = [claim['paper_title'] for claim in claims]
+        responses = [self.tool.run(paper_title) for paper_title in papers_titles]
+        final_response = await self._verification(claims, responses)
+        return final_response
+
+    async def run_with_tool_api_call(self, prompts, responses):
+        batch_size = 5
+        num_batches = math.ceil(len(prompts) / batch_size)
+
+        self.sample_list = [{"prompt": prompt, "response": response, "category": 'scientific'} for prompt, response in zip(prompts, responses)]
+
+        for i in range(num_batches):
+            print(i)
+            batch_start = i * batch_size
+            batch_end = min((i + 1) * batch_size, len(responses))
+
+            claims_in_responses, queries_in_responses, evidences_in_responses, verifications_in_responses = await self.run_with_tool_live(responses[batch_start:batch_end])
+
+            for j, (claims_in_response, queries_in_response, evidences_in_response, verifications_in_response) in enumerate(zip(claims_in_responses, queries_in_responses, evidences_in_responses, verifications_in_responses)):
+                index = batch_start + j
+
+                self.sample_list[index].update({
+                    'claims': claims_in_response,
+                    'queries': queries_in_response,
+                    'evidences': evidences_in_response,
+                    'claim_level_factuality': verifications_in_response,
+                    'response_level_factuality': all([verification['factuality'] if verification != None else True for verification in verifications_in_response])
+                })
+        return self.sample_list
+
+    async def run_with_tool_dataset(self, annotated_dataset_path: str, with_tool_classified_dataset_path: str, rerun: bool = False, rerun_indices: list = []):
+        # Example of a line: 
+        # {"paper_title": "A Survey of Modern Authorship Attribution Methods", "paper_author(s)": "Stamatatos, Efstathios", "paper_pub_year": "2013", "label": True / False}
+        if rerun == False:
+            with open(annotated_dataset_path, 'r') as f:
+                data = [json.loads(line) for line in f]
+            self.sample_list = [claim for sample in data for claim in sample['claims']]
+            rerun_elements = self.sample_list
+        else:
+            with open(with_tool_classified_dataset_path, 'r') as f:
+                data = [json.loads(line) for line in f]
+            self.sample_list = data
+            rerun_elements = [self.sample_list[i] for i in rerun_indices]
+
+        batch_size = 5
+        num_batches = math.ceil(len(rerun_elements) / batch_size) # 5
+
+        for i in range(num_batches):
+            print(i)
+            batch_start = i * batch_size
+            batch_end = (i + 1) * batch_size if (i + 1) * batch_size < len(rerun_elements) else len(rerun_elements)
+
+            responses = await self.run_with_tool_live_without_claim_extraction(rerun_elements[batch_start:batch_end])
+            for j, response in enumerate(responses):
+                index = batch_start + j if rerun == False else rerun_indices[batch_start + j]
+                if response == None:
+                    self.sample_list[index]['with_tool_classification'] = 'None'
+                    self.sample_list[index]['error'] = 'None'
+                else:
+                    self.sample_list[index]['with_tool_classification'] = response.get('factuality', 'None')
+                    self.sample_list[index]['error'] = response.get('error', 'None')
+        
+            # save everything after each batch to prevent data loss
+            with open(with_tool_classified_dataset_path, 'w') as f:
+                for item in self.sample_list:
+                    json_str = json.dumps(item)
+                    f.write(json_str + '\n')
+
+    async def run_self_check_live(self, fewshot, batch):
+        user_prompt_key = 'user_3_shot_CoT' if fewshot else 'user_zero_shot_CoT'
+        messages_list = [
+            [
+                {"role": "system", "content": self.self_check_prompt['system']},
+                {"role": "user", "content": self.self_check_prompt[user_prompt_key].format(scientific_literature=response)}
+            ]
+            for response in batch
+        ]
+        return await self.chat.async_run(messages_list, Dict)
+
+    async def run_self_check_dataset(self, annotated_dataset_path: str, self_check_classified_dataset_path: str, fewshot: bool = False, rerun: bool = False, rerun_indices: list = []):
+        # Example of a line: 
+        # {"paper_title": "A Survey of Modern Authorship Attribution Methods", "paper_author(s)": "Stamatatos, Efstathios", "paper_pub_year": "2013", "annotation": True / False}
+        data_path = annotated_dataset_path if not rerun else self_check_classified_dataset_path
+        with open(data_path, 'r') as f:
+            data = [json.loads(line) for line in f]
+        self.sample_list = data if rerun else [claim for sample in data for claim in sample['claims']]
+        rerun_elements = self.sample_list if not rerun else [self.sample_list[i] for i in rerun_indices]
+
+        batch_size = 5
+        num_batches = math.ceil(len(rerun_elements) / batch_size)
+
+        for i in range(num_batches):
+            print(i)
+            batch_start = i * batch_size
+            batch_end = (i + 1) * batch_size
+            batch = rerun_elements[batch_start:batch_end]
+            batch = [{k:v for k,v in d.items() if k != "label"} for d in batch]
+
+            responses = await self.run_self_check_live(fewshot, batch)
+            for j, response in enumerate(responses):
+                index = batch_start + j if rerun == False else rerun_indices[batch_start + j]
+                if response == None:
+                    self.sample_list[index]['self_check_classification'] = 'None'
+                    self.sample_list[index]['self_check_reasoning'] = 'None'
+                else:
+                    self.sample_list[index]['self_check_classification'] = response.get('factuality', 'None')
+                    self.sample_list[index]['self_check_reasoning'] = response.get('reasoning', 'None')
+        
+            # save everything after each batch to prevent data loss
+            with open(self_check_classified_dataset_path, 'w') as f:
+                for item in self.sample_list:
+                    json_str = json.dumps(item)
+                    f.write(json_str + '\n')
+```
+
+Contents of factool/scientific/tool.py:
+```
+import yaml
+
+from scholarly import scholarly
+from scholarly import ProxyGenerator
+import os
+
+from factool.env_config import factool_env_config
+
+# env
+# scraper_api_key = factool_env_config.scraper_api_key
+
+class google_scholar():
+    def __init__(self):
+        pg = ProxyGenerator()
+        scraper_api_key = os.environ.get("SCRAPER_API_KEY", None)
+        assert scraper_api_key is not None, "Please set the SCRAPER_API_KEY environment variable."
+        assert scraper_api_key != '', "Please set the SCRAPER_API_KEY environment variable."
+        success = pg.ScraperAPI(scraper_api_key)
+        scholarly.use_proxy(pg)
+
+    def run(self, query):
+        try:
+            results = scholarly.search_pubs(query)
+            paper_info = next(results)
+            paper_info_subset = {key: paper_info['bib'][key] for key in ['title', 'author', 'pub_year']}
+            return paper_info_subset
+        except StopIteration:
+            return {'title': "no match!", "author": "no match!", "pub_year": "no match!"}
+
+```
+
+Contents of datasets/chinese/README.md:
+```
+## ChineseFactEval: A Factuality Benchmark for Chinese LLMs
+
+We release a dataset designed for benchmarking the factuality of Chinese LLMs. Please check out our full [report](https://GAIR-NLP.github.io/ChineseFactEval).
+
+This benchmark contains 125 prompts across 7 scenarios: general domain, scientific research, medical, law, finance, math, and Chinese modern history. 
+
+We evaluate six Chinese LLMs, including Yiyan (文心一言), Doubao (豆包), Baichuan （百川), ChatGlm （智谱清言), Sensetime (商量), and ABAB, alongside GPT-4, using our benchmark. The annotations were done collectively by the authors of the report. We also leverage Factool, a tool augmented framework for detecting factual errors of texts generated by LLMs, to assist us in annotating the complex responses in medical and law domains. The results from Factool have also been made available.
+
+## Factuality Leaderboard for Chinese LLMs
+
+Our factuality leaderboard shows the factuality of different chatbots in different scenarios.
+
+| LLMs | General | Scientific Research | Medical |   Law   | Finance | Math | Chinense Modern History | Total |
+| -------- | -------- | -------- | -------- | ---------------- | -------- | ------------------ | ------ | --------------------- |
+| GPT-4            | ****61/94**** | ****13.5 / 21**** | 9 / 20         | 19/47        | ****12 / 21**** | 26  / 52        | ****43 / 46**** | ****183.5 / 301****|
+| Doubao (豆包）    | 49/94         | 3 / 21            | ****12 / 20**** | ****20 / 47**** | 7 / 21          | 11 / 52        | 37 / 46        | 139 / 301   |
+| Yiyan (文心一言)   | 34/94        | 6 / 21             | 8 / 20         | 13 / 47        | 1.5  / 21        | ****37 / 52**** | 23 / 46         | 122.5 / 301 |
+| Sensetime (商量)  | 44/94        | 3 / 21             | 6  / 20        | 12 / 47        | 7  / 21         | 0 / 52        | 31.5 / 46         | 103.5 / 301 | 
+| ChatGlm （智谱清言) | 27.5/94    | 0 / 21              | 3  / 20        | 13 / 47        | 8  / 21         | 15 / 52       | 23  / 46         | 89.5 / 301 |
+| ABAB              | 34.5/94     | 1.5 / 21            | 9  / 20        | 15 / 47        | 5 / 21         | 6 / 52        | 6  / 46          | 77 / 301 | 
+| Baichuan (百川)    | 18/94      | 0 / 21               | 3  / 20        | 7 / 47        | 3 / 21          | 2 / 52        | 30.5 / 46          | 63.5 / 301 |
+
+```
+
+Contents of halu-j/README.md:
+```
+# Halu-J: Critique-Based Hallucination Judge
+
+This folder contains the resources for [Halu-J](https://arxiv.org/abs/2407.12943).
+
+## Table of contents
+- [Introduction](#Introduction)
+- [Evaluation](#Evaluation)
+- [Data](#Data)
+- [Citation](#Citation)
+
+## Introduction
+We introduce HALU-J, an open-source, critique-based hallucination detection model with 7 billion parameters capable of providing fine-grained critiques and filtering out unrelated information during hallucination detection. It is featured with:
+* __Workflow__: We establish a novel multiple-evidence hallucination detection workflow featuring evidence categorization, evidence reordering, evidence-by-evidence analysis, and information aggregation to construct a multiple evidence hallucination detection dataset _ME-FEVER_.
+* __Capability__: Our model can filter unrelated contexts and generate detailed and reliable critique with a carefully designed format in multiple evidence scenarios.
+* __Flexibility__: Our model can flexibly toggle between multiple evidence scenarios and single evidence scenarios.
+
+Here is an example comparing critique of our model and critique of Mistral-7b-instruct-v0.2.
+
+<img src="figs/example.png" style="zoom: 100%;" />
+
+## Evalution
+Here is our label prediction accuracy results of different models on various benchmarks.
+
+| Model                   | ME-FEVER | FEVER | ANLI | WANLI | HaluEval | KBQA |
+|-------------------------|----------|-------|------|-------|----------|------|
+| GPT-3.5-Turbo            | 0.81     | 0.87  | 0.47 | 0.47  | 0.59     | 0.69 |
+| GPT-4o                   | 0.83 | **0.88** | <u>0.74</u> | <u>0.6</u> | <u>0.81</u> | <u>0.84</u> |
+Mistral-7B-Instruct-v0.2 | 0.78     | 0.82  | 0.62 | 0.54  | 0.57     | 0.68 |
+| llama-2-13b-chat-hf      | 0.13     | 0.37  | 0.27 | 0.29  | 0.24     | 0.19 |
+| Llama-3-8B-Instruct      | 0.63     | 0.03  | 0.02 | 0.00  | 0.01     | 0.20 |
+| Qwen1.5-7B-Chat          | 0.49     | 0.79  | 0.68 | 0.53  | 0.61     | 0.69 |
+| Halu-j (w/o DPO) | **0.90** | 0.90 | 0.69 | 0.54  | 0.65     | 0.76 |
+| Halu-j           | <u>0.91</u>   | <u>0.90</u>  | **0.70**  | **0.54**  | **0.65**  | **0.76** |
+
+## Data
+The training data and testing data is in `data` folder.
+Each instance is a dictionary following the format below.
+```python
+{
+    "claim": the original claim of FEVER data,
+    "golden_evidence": the original evidence of FEVER data,
+    "label": the original label of FEVER data,
+    "completely_irrelevant_evidence_x": a synthetic completely irrelvant evidence,
+    "partial_irrelevant_evidence_x": a synthetic partial irrelevant evidence,
+    "misled_evidence_x": a synthetic misleading evidence,
+    "explanation_x"：the explanation of the corresonding misleading evidence
+}
+```
+
+## Citation
+Please cite our paper if it is helpful to you.
+```
+@article{wang2024halu,
+  title={Halu-J: Critique-Based Hallucination Judge},
+  author={Wang, Binjie and Chern, Steffi and Chern, Ethan and Liu, Pengfei},
+  journal={arXiv preprint arXiv:2407.12943},
+  year={2024}
+}
+```
+```
+
+Contents of halu-j/figs/example.png:
+```
+[Could not decode file contents]
+
+```
+
+Contents of halu-j/prompts/filter_misleading_evidence.txt:
+```
+I'll provide you with a claim and associated evidence. At the same time, you will be informed of the correctness of this claim. Your task is to classify whether the evidence changes the correctness of the claim. If the correctness of the claim is neutral, it means either the supporting or the opposing evidence should be considered changing the correctness of the claim while the evidence neither supports or refutes the claim should be considered maintaining the correctness of the claim.
+
+[claim]: {claim}
+[label]: {label}
+[evidence]: {evidence}
+
+Here is your output format(a python dictionary):
+[{{
+    "explanation": the reason of your classification,
+    "classification": True or False. True if the evidence maintains the correctness of the claim and False if the evidence changes the correctness of the claim
+}}]
+```
+
+Contents of halu-j/prompts/generate_partial_irrelevant_evidence.txt:
+```
+I'll provide you with a claim and an associated evidence snippet. At the same time, you will be informed of the correctness of this claim. Your task is to output 4 other pieces of evidence related to the body of the claim, which has the following requirements:
+1. The subject is the same as the subject in the claim
+2. Do not contradict the information in the existing evidence
+3. Don't support or oppose claim. This evidence should be a useless piece of information to judge the correctness of the claim
+4. The length of the generated evidence should be close to the length of the provided evidence which is often  7-8 sentences
+[claim]: {claim}
+[evidence]: {evidence}
+[correctness]: {label}
+
+Here is your output format(a list of string with the length of 4):
+["evidence1", "evidence2", "evidence3", "evidence4"]
+Respond in the correct format directly.
+```
+
+Contents of halu-j/prompts/reformat_critique.txt:
+```
+Given a claim, a set of evidence and a critique, your task is to reformat the critique.
+
+CLAIM: {claim}
+EVIDENCES: {evidence}
+CRITIQUE: {critique}
+
+The format of expected critique is as follows:
+
+To verify the factuality of the claim, the reasoning is as follows.
+[Completely Irrelevant Evidence]
+A discussion and analysis of completely irrelevant evidence
+[Partial Irrelevant Evidence]
+A discussion and analysis of partial irrelevant evidence. The evidence must be analyzed case by case. You should point out the relevant and irrelevant information in the evidence respectively.
+[Highly related Evidence]
+A discussion and analysis of highly related evidence. The evidence must be analyzed case by case. You should dive into the details and discuss the relationship between the evidence and the claim.
+[Conclusion]
+Aggregate the analysis above and conclude whether the claim is true, false, or neutral
+
+Your task is only reformat the critique. Don't change any reasoning or information in the original critique.
+Output the reformatted critique directly.
+```
+
+Contents of halu-j/prompts/extract_evidence.txt:
+```
+I'll provide you with a set of evidence and a critique based on provided evidence.
+Your task is to classify evidence into three categories which are [Completely Irrelevant Evidence], [Partial Irrelevant Evidence], and [Highly related Evidence].
+You should strictly stick to the classification statements of the critique and don't change its meaning.
+Evidence corresponding to the content in [Completely Irrelevant Evidence] should be matched to "Completely Irrelevant Evidence" category.
+Evidence corresponding to the content in [Partial Irrelevant Evidence] should be matched to "Partial Irrelevant Evidence" category.
+Evidence corresponding to the content in [Highly related Evidence] should be matched to "Highly related Evidence" category.
+If there is evidence doen't correspond to any content in the critique, it should be matched to "Unmentioned" category.
+
+Here is the evidence:
+
+{evidence}
+
+Here is the critique:
+
+{critique}
+
+Respond in a python dictionary with the following format:
+{{
+    "Completely Irrelevant Evidence":[evidence_number, evidence_number, ...],
+    "Partial Irrelevant Evidence":[evidence_number, evidence_number, ...],
+    "Highly related Evidence":[evidence_number, evidence_number, ...],
+    "Unmentioned Evidence":[evidence_number, evidence_number, ...]
+}}
+Output in correct format directly.
+```
+
+Contents of halu-j/prompts/score.txt:
+```
+I'm designing verifiers to judge whether a specific claim is correct based on evidence. There are three possible situations: Neutral / True / False. I am evaluating the quality of the verifier's responses. Your task is to score the response provided. The score range is 1-100. The ideal standard for responses are as follows:
+
+The response should clearly point out whether the content of each piece of evidence is relevant to the claim.
+The response should clearly identify the span in the claim that is particularly relevant to the relevant context in the evidence.
+The response should clearly compare the related information in the claim and the evidence and provide a reasonable explanation. The explanation should be clear and reasonable.
+The response should maintain faithfulness. It should not assert that the claim supports something not present in the original claim, nor should it suggest that the evidence supports something not found in the original evidence.
+The response should ensure completeness, that is, all parts of the evidence that are highly relevant to the claim should be analyzed, and nothing should be omission.
+The response should have a clear and reasonable logical reasoning process.
+
+Here is the prompt for the verifier, which contains the claim and the evidence: 
+{prompt}
+
+Here is the response generated by the verifier: 
+{response}
+
+Try to be objective and start your response directly(low score for poor responses is encouraged)
+
+You should only respond in format as described below. DO NOT RETURN ANYTHING ELSE. START YOUR RESPONSE WITH '{{'.
+{{
+    "reasoning": "a brief explanation of your score",
+    "score": the score you provide
+}}
+```
+
+Contents of halu-j/prompts/synthesize_golden_critique.txt:
+```
+I'm now training a large language model for claim verification. I expect it to generate high-quality critique given claim and evidence. Your task is to help me produce training datas.
+
+Here is the given prompt I used for training:
+[prompt used for training] 
+You are given a claim. Your task is to identify whether there are any factual errors within the claim based on the given evidence.
+The response should be a python dictionary with two keys - "reasoning", "factuality", which correspond to the reasoning and whether the given claim is factual or not (string - True, False or Neutral)
+The following is the given claim
+{claim}
+The following is the provided evidences:
+{formatted_evidences}
+
+Now you'll get additional key information to help generate the 'golden' response expected.
+{additional_info}
+Most importantly, the factuality of the claim is {label}. Stick to this label when generating response.
+
+Your task is to use the above additional information to output the 'golden' response as training datas, while making sure that you do not show that you got the extra information.
+
+A 'golden' response requires the following requirements:
+1. Be specific and complete in your response
+2. Your response should start with an short assertion about the factuality of the claim like the factuality of the claim xxx is true / false / neutral
+3. The response needs to go through each piece of evidence and analyze its relationship to the claim, which means you should analyze from the first evidence one by one
+4. For evidence that is completely unrelated, you can briefly analyze it and point out that it is not related to the claim
+5. For evidence that is basically unrelated to the content, you can briefly analyze and point out the reason like although it has the same subject as the claim, the content has nothing to do with the claim
+6. For evidence with highly relevant content, give a reasonable analysis of whether the evidence support or oppose the claim, or neither support nor oppose it (take care to refer to the additional information I have provided you above, and do not show that you have this information. e.g. Be careful when using word like 'mislead'. The so-called misleading evidence is systhesized by me to mislead the chatbots. However, in real scenario, you should just regard it as a highly related but confusing evidence. You can not regard it as a wrong or misleading evidence)
+7. When you go through the misleading evidence (which in real scenarios is highly related and confusing evidence) with explanation, you can consider include the information and discussion in the explanation in your analysis. You can also demonstrate the relevance between the claim and the evidence first.
+8. At the end of the response, there needs to be a summary, which synthesizes the above analysis and derives the factuality of the claim
+
+You should only respond in format as described below. DO NOT RETURN ANYTHING ELSE. START YOUR RESPONSE WITH '{{'.
+{{
+    "reasoning": "Why is the given claim factual non-factual or neutral? You must provide specific evidences to support your decision.",
+    "factuality": "True" if the given claim is totally supported by the evidences, "False" if the given claim contradicts the evidences in some way, "Neutral" if evidence neither supports nor refutes the claim.
+}}
+```
+
+Contents of halu-j/prompts/generate_misleading_evidence.txt:
+```
+I'll provide you with a claim and an associated evidence snippet. At the same time, you will be informed of the correctness of this claim. Your task is to output 3 other pieces of evidence related to the body of the claim, which has the following requirements:
+1. Do not contradict the information in the existing evidence
+2. The length of the generated evidence should be close to the length of the provided evidence, which is often  7-8 sentences
+3. The evidence should not change the correctness of the claim, which is true. However, the evidence needs to contain confusing information to mislead the reader into believing that the claim is {opposite_label} (which is actually {label})
+4. The misleading information needs to be deceptive enough.
+5. Try to vary the pieces of evidence you generate and make them have different misleading points.
+
+[claim]: {claim}
+[evidence]: {evidence}
+[correctness]: {label}
+
+Here is your output format(a list of python dictionaries with the length of 3):
+[{{
+    "evidence": the evidence you generate,
+    "explanation": What's the misleading information in the evidence(briefly)
+}},...]
+
+Respond in the correct format directly.
+```
+
+Contents of plugin_config/LICENSE:
+```
+MIT License
+
+Copyright (c) 2023 OpenAI
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+```
+
+Contents of plugin_config/logo.png:
+```
+[Could not decode file contents]
+
+```
+
+Contents of plugin_config/main.py:
+```
+import json
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from typing import Optional, List, Dict, Union
+from factool.factool import Factool
+
+foundation_model = 'gpt-4'
+factool_instance = Factool(foundation_model)
+
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://chat.openai.com"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+class FactCheckRequest(BaseModel):
+    prompt: str
+    response: str
+    entry_point: Optional[str]
+
+class FactCheckResponse(BaseModel):
+    fact_check_result: List[Dict[str, Union[str, List[str]]]]
+
+fact_checks = {}
+
+@app.post("/fact_check_kbqa")
+async def fact_check_kbqa(request_data: FactCheckRequest):
+    request_obj = FactCheckRequest(**request_data.dict())
+    fact_check_result = await factool_instance.run_for_plugin([{'prompt': request_obj.prompt, 'response': request_obj.response, 'category': 'kbqa'}])
+    fact_check_id = len(fact_checks) + 1
+    fact_checks[fact_check_id] = fact_check_result
+    return JSONResponse(content={"fact_check_id": fact_check_id, "fact_check_result": fact_check_result})
+
+@app.post("/fact_check_code")
+async def fact_check_code(request_data: FactCheckRequest):
+    request_obj = FactCheckRequest(**request_data.dict())
+    fact_check_result = await factool_instance.run_for_plugin([{'prompt': request_obj.prompt, 'response': request_obj.response, 'category': 'code', 'entry_point': request_obj.entry_point}])
+    fact_check_id = len(fact_checks) + 1
+    fact_checks[fact_check_id] = fact_check_result
+    return JSONResponse(content={"fact_check_id": fact_check_id, "fact_check_result": fact_check_result})
+
+@app.post("/fact_check_math")
+async def fact_check_math(request_data: FactCheckRequest):
+    request_obj = FactCheckRequest(**request_data.dict())
+    fact_check_result = await factool_instance.run_for_plugin([{'prompt': request_obj.prompt, 'response': request_obj.response, 'category': 'math'}])
+    fact_check_id = len(fact_checks) + 1
+    fact_checks[fact_check_id] = fact_check_result
+    return JSONResponse(content={"fact_check_id": fact_check_id, "fact_check_result": fact_check_result})
+
+@app.post("/fact_check_scientific_literature")
+async def fact_check_scientific_literature(request_data: FactCheckRequest):
+    request_obj = FactCheckRequest(**request_data.dict())
+    fact_check_result = await factool_instance.run_for_plugin([{'prompt': request_obj.prompt, 'response': request_obj.response, 'category': 'scientific'}])
+    fact_check_id = len(fact_checks) + 1
+    fact_checks[fact_check_id] = fact_check_result
+    return JSONResponse(content={"fact_check_id": fact_check_id, "fact_check_result": fact_check_result})
+
+@app.get("/get_fact_check/{fact_check_id}")
+async def get_fact_check(fact_check_id: int):
+    if fact_check_id in fact_checks:
+        fact_check_result = fact_checks[fact_check_id]
+        return JSONResponse(content={"fact_check_id": fact_check_id, "fact_check_result": fact_check_result})
+    else:
+        return JSONResponse(content={"error": "Fact check not found"})
+
+@app.get("/logo.png")
+async def plugin_logo():
+    filename = "logo.png"
+    return FileResponse(filename, media_type="image/png")
+
+@app.get("/.well-known/ai-plugin.json")
+async def read_plugin_manifest():
+    return FileResponse(".well-known/ai-plugin.json")
+
+@app.get("/openapi.yaml")
+async def openapi_spec():
+    return FileResponse("./openapi.yaml")
+
+def main():
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=5003, log_level="info")
+
+if __name__ == "__main__":
+    main()
+```
+
